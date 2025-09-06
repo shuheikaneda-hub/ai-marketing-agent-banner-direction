@@ -426,38 +426,75 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
+        /* 結果表示のグリッドレイアウト */
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 1200px) {
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .result-left, .result-right {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
         /* バナープレビュー */
+        .preview-container {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .preview-wrapper {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .preview-label {
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+        
         .banner-preview {
             background: var(--gray-100);
             border: 2px dashed var(--gray-400);
             border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 400px;
+            min-height: 300px;
             text-align: center;
         }
         
         .banner-preview.square {
             aspect-ratio: 1/1;
-            max-width: 400px;
-            margin: 0 auto 2rem;
+            max-width: 250px;
+            margin: 0 auto;
         }
         
         .banner-preview.portrait {
             aspect-ratio: 9/16;
-            max-width: 300px;
-            margin: 0 auto 2rem;
+            max-width: 200px;
+            margin: 0 auto;
         }
         
         .banner-preview.landscape {
             aspect-ratio: 16/9;
-            max-width: 600px;
-            margin: 0 auto 2rem;
+            max-width: 400px;
+            margin: 0 auto;
         }
         
         .banner-grid {
@@ -684,7 +721,7 @@
                 </div>
                 <div class="progress-step" data-step="3">
                     <div class="progress-step-circle">3</div>
-                    <div class="progress-step-label">コピー作成</div>
+                    <div class="progress-step-label">コピー設定</div>
                 </div>
                 <div class="progress-step" data-step="4">
                     <div class="progress-step-circle">4</div>
@@ -842,7 +879,7 @@
             <div class="card form-step" data-step="3" style="display: none;">
                 <div class="card-header">
                     <div class="card-header-icon">✏️</div>
-                    コピー情報
+                    コピー設定
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -940,69 +977,99 @@
         
         <!-- 結果表示 -->
         <div class="result-section" id="resultSection">
-            <!-- バナープレビュー -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-header-icon">👁️</div>
-                    バナー構成プレビュー
-                </div>
-                <div class="card-body">
-                    <div class="banner-preview" id="bannerPreview">
-                        <div class="banner-grid">
-                            <div class="banner-grid-line"></div>
-                            <div class="banner-grid-line"></div>
-                            <div class="banner-grid-line"></div>
-                            <div class="banner-grid-line"></div>
-                            <div class="banner-grid-line"></div>
-                            <div class="banner-grid-line"></div>
-                            <div class="banner-grid-line"></div>
-                            <div class="banner-grid-line"></div>
-                            <div class="banner-grid-line"></div>
+            <div class="result-grid">
+                <!-- 左側：プレビューと構成指示 -->
+                <div class="result-left">
+                    <!-- バナープレビュー -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header-icon">👁️</div>
+                            バナー構成プレビュー
                         </div>
-                        <div id="previewContent"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 構成・レイアウト指示 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-header-icon">📐</div>
-                    構成・レイアウト指示
-                </div>
-                <div class="card-body">
-                    <div class="instruction-section" id="layoutInstruction">
-                        <!-- レイアウト指示がここに入る -->
-                    </div>
-                </div>
-            </div>
-            
-            <!-- デザイン指示 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-header-icon">🎨</div>
-                    デザイン指示
-                </div>
-                <div class="card-body">
-                    <div class="instruction-section" id="designInstruction">
-                        <!-- デザイン指示がここに入る -->
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 素材指示 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-header-icon">🖼️</div>
-                    素材指示
-                </div>
-                <div class="card-body">
-                    <div class="instruction-section">
-                        <div class="instruction-title">
-                            <span>📝</span> 背景素材パターン
+                        <div class="card-body">
+                            <div class="preview-container">
+                                <div class="preview-wrapper">
+                                    <div class="preview-label">パターンA：中央配置型</div>
+                                    <div class="banner-preview" id="bannerPreview1">
+                                        <div class="banner-grid">
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                        </div>
+                                        <div id="previewContent1"></div>
+                                    </div>
+                                </div>
+                                <div class="preview-wrapper">
+                                    <div class="preview-label">パターンB：分割配置型</div>
+                                    <div class="banner-preview" id="bannerPreview2">
+                                        <div class="banner-grid">
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                            <div class="banner-grid-line"></div>
+                                        </div>
+                                        <div id="previewContent2"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="material-variations" id="materialVariations">
-                            <!-- 素材バリエーションがここに入る -->
+                    </div>
+                    
+                    <!-- 構成・レイアウト指示 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header-icon">📐</div>
+                            構成・レイアウト指示
+                        </div>
+                        <div class="card-body">
+                            <div class="instruction-section" id="layoutInstruction">
+                                <!-- レイアウト指示がここに入る -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右側：デザイン指示と素材指示 -->
+                <div class="result-right">
+                    <!-- デザイン指示 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header-icon">🎨</div>
+                            デザイン指示
+                        </div>
+                        <div class="card-body">
+                            <div class="instruction-section" id="designInstruction">
+                                <!-- デザイン指示がここに入る -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 素材指示 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header-icon">🖼️</div>
+                            素材指示
+                        </div>
+                        <div class="card-body">
+                            <div class="instruction-section">
+                                <div class="instruction-title">
+                                    <span>📝</span> 背景素材パターン（2パターン）
+                                </div>
+                                <div class="material-variations" id="materialVariations">
+                                    <!-- 素材バリエーションがここに入る -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1011,7 +1078,7 @@
             <!-- エクスポート -->
             <div class="export-section">
                 <h3 style="margin-bottom: 1rem;">📦 ディレクション指示書のエクスポート</h3>
-                <p style="color: var(--gray-700); margin-bottom: 1.5rem;">
+                <p style="color: var(--dark); margin-bottom: 1.5rem;">
                     生成された指示書をデザイナーに共有してください
                 </p>
                 <div class="export-buttons">
@@ -1154,8 +1221,8 @@
                 productName: document.getElementById('productName').value,
                 category: document.getElementById('category').value,
                 appealStrategy: document.getElementById('appealStrategy').value,
-                size: document.querySelector('input[name="size"]:checked').value,
-                patterns: document.querySelector('input[name="patterns"]:checked').value,
+                size: document.querySelector('input[name="size"]:checked')?.value || 'square',
+                patterns: document.querySelector('input[name="patterns"]:checked')?.value || '3',
                 media: selectedMedia,
                 catchCopy: document.getElementById('catchCopy').value,
                 bodyCopy: document.getElementById('bodyCopy').value,
@@ -1375,9 +1442,14 @@ ${formData.bodyCopy ? `ボディコピー：${formData.bodyCopy}` : ''}
 ${formData.cta ? `CTA：${formData.cta}` : ''}
 
 ■レイアウト指示
-${generatedResult.layout.type}
-${generatedResult.layout.description}
-${generatedResult.layout.details.map(d => `・${d}`).join('\n')}
+パターンA：${generatedResult.layouts[0].type}
+${generatedResult.layouts[0].description}
+
+パターンB：${generatedResult.layouts[1].type}
+${generatedResult.layouts[1].description}
+
+共通配置指示：
+${generatedResult.layoutDetails.map(d => `・${d}`).join('\n')}
 
 ■デザイン指示
 配色：${generatedResult.design.colors}
@@ -1419,7 +1491,41 @@ ${m.description}
 </body>
 </html>`;
             
-            const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `banner_direction_${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('テキストファイルをダウンロードしました');
+        }
+        
+        // 再生成
+        function regenerate() {
+            generateDirection();
+        }
+        
+        // トースト表示
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            toastMessage.textContent = message;
+            toastIcon.textContent = type === 'error' ? '❌' : '✅';
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // 初期化
+        updateButtons(); Blob([html], { type: 'text/html;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -1505,41 +1611,4 @@ ${m.prompt}
 ==========================================
 `;
             
-            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `banner_direction_${Date.now()}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            showToast('テキストファイルをダウンロードしました');
-        }
-        
-        // 再生成
-        function regenerate() {
-            generateDirection();
-        }
-        
-        // トースト表示
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            const toastIcon = document.getElementById('toastIcon');
-            
-            toastMessage.textContent = message;
-            toastIcon.textContent = type === 'error' ? '❌' : '✅';
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-        
-        // 初期化
-        updateButtons();
-    </script>
-</body>
-</html>
+            const blob = new
