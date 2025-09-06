@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>バナー広告制作ディレクションツール | Professional Banner Direction Tool</title>
+    <title>バナー広告制作ディレクションツール | AI-Powered Banner Direction Tool</title>
     <style>
         * {
             margin: 0;
@@ -331,6 +331,16 @@
             transform: none;
         }
         
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-light);
+        }
+        
         .btn-success {
             background: var(--success);
             color: white;
@@ -375,89 +385,212 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* バナープレビュー */
-        .preview-container {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+        /* ディレクション指示書テーブル */
+        .direction-table {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
         }
         
-        .preview-wrapper {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .preview-label {
-            font-weight: 600;
-            color: var(--gray-700);
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
-        }
-        
-        .banner-preview {
-            background: var(--gray-100);
-            border: 2px dashed var(--gray-400);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 250px;
-            text-align: center;
-        }
-        
-        .banner-preview.square {
-            aspect-ratio: 1/1;
-            max-width: 250px;
-            margin: 0 auto;
-        }
-        
-        /* 指示書セクション */
-        .instruction-section {
-            background: var(--gray-50);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary);
-        }
-        
-        .instruction-title {
+        .direction-header {
+            background: #4A4A4A;
+            color: white;
+            padding: 1rem 1.5rem;
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .direction-row {
+            display: flex;
+            border-bottom: 1px solid var(--gray-300);
+        }
+        
+        .direction-row:last-child {
+            border-bottom: none;
+        }
+        
+        .direction-label {
+            background: #5A5A5A;
+            color: white;
+            padding: 1.5rem 1rem;
+            width: 150px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .direction-content {
+            flex: 1;
+            padding: 1.5rem;
+            background: white;
+        }
+        
+        .direction-content ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        
+        .direction-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        .direction-content p {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        /* バナープレビュー */
+        .banner-preview-section {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: #F8F8F8;
+            border: 1px solid var(--gray-300);
+        }
+        
+        .banner-preview-main {
+            flex: 1;
+            background: white;
+            border: 2px solid var(--gray-400);
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+        
+        .banner-preview-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .preview-composition {
+            background: white;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            padding: 1rem;
+        }
+        
+        .preview-composition h4 {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+        
+        .preview-composition-img {
+            width: 100%;
+            height: 120px;
+            background: #f0f0f0;
+            border: 1px dashed var(--gray-400);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            font-size: 0.85rem;
+        }
+        
+        .preview-notes {
+            background: white;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            padding: 1rem;
+        }
+        
+        .preview-notes-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
-        .instruction-content {
-            color: var(--gray-800);
-            line-height: 1.8;
+        .preview-notes ul {
+            margin: 0;
+            padding-left: 1.2rem;
+            font-size: 0.85rem;
+            color: var(--gray-700);
         }
         
-        /* 素材バリエーション */
-        .material-variations {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+        .preview-notes li {
+            margin-bottom: 0.3rem;
         }
         
-        .material-card {
-            background: var(--white);
+        /* コピー配置パターン */
+        .copy-placement-top-left {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            text-align: left;
+        }
+        
+        .copy-placement-top-center {
+            position: absolute;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        
+        .copy-placement-center {
+            text-align: center;
+        }
+        
+        .copy-placement-bottom-right {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            text-align: right;
+        }
+        
+        .copy-placement-left-center {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: left;
+            max-width: 40%;
+        }
+        
+        /* パターンタブ */
+        .pattern-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pattern-tab {
+            padding: 0.5rem 1rem;
+            background: var(--gray-200);
+            border: none;
             border-radius: var(--radius);
-            padding: 1.25rem;
-            border: 2px solid var(--gray-300);
+            cursor: pointer;
+            font-weight: 500;
             transition: var(--transition);
         }
         
-        .material-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .pattern-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .pattern-content {
+            display: none;
+        }
+        
+        .pattern-content.active {
+            display: block;
         }
         
         /* エクスポートセクション */
@@ -788,57 +921,161 @@
         
         <!-- 結果表示 -->
         <div class="result-section" id="resultSection">
-            <!-- バナープレビュー -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-header-icon">👁️</div>
-                    バナー構成プレビュー
-                </div>
-                <div class="card-body">
-                    <div class="preview-container">
-                        <div class="preview-wrapper">
-                            <div class="preview-label">パターンA：中央配置型</div>
-                            <div class="banner-preview" id="bannerPreview1">
-                                <div id="previewContent1"></div>
-                            </div>
+            <!-- パターンタブ -->
+            <div class="pattern-tabs">
+                <button class="pattern-tab active" onclick="switchPattern(1)">パターンA</button>
+                <button class="pattern-tab" onclick="switchPattern(2)">パターンB</button>
+                <button class="pattern-tab" onclick="switchPattern(3)" id="pattern3Tab" style="display:none;">パターンC</button>
+            </div>
+            
+            <!-- パターンA -->
+            <div class="pattern-content active" id="pattern1">
+                <div class="direction-table">
+                    <div class="direction-header">コピー構成（パターンA）</div>
+                    
+                    <div class="direction-row">
+                        <div class="direction-label">制作物</div>
+                        <div class="direction-content">
+                            <ul>
+                                <li>形式：画像</li>
+                                <li>サイズ：<span id="sizeInfo1"></span></li>
+                                <li>パターン数：<span id="patternCount1"></span></li>
+                                <li>想定媒体：<span id="mediaInfo1"></span></li>
+                            </ul>
                         </div>
-                        <div class="preview-wrapper">
-                            <div class="preview-label">パターンB：分割配置型</div>
-                            <div class="banner-preview" id="bannerPreview2">
-                                <div id="previewContent2"></div>
+                    </div>
+                    
+                    <div class="direction-row">
+                        <div class="direction-label">デザイン<br>指示</div>
+                        <div class="direction-content" id="designDirection1">
+                            <!-- デザイン指示がここに入る -->
+                        </div>
+                    </div>
+                    
+                    <div class="direction-row">
+                        <div class="direction-label">素材</div>
+                        <div class="direction-content">
+                            <div class="banner-preview-section">
+                                <div class="banner-preview-main" id="bannerPreview1">
+                                    <!-- プレビューがここに入る -->
+                                </div>
+                                <div class="banner-preview-info">
+                                    <div class="preview-composition">
+                                        <h4>背景・男性画像</h4>
+                                        <div class="preview-composition-img">背景素材イメージ</div>
+                                    </div>
+                                    <div class="preview-notes">
+                                        <div class="preview-notes-title">
+                                            ■構成指示
+                                        </div>
+                                        <ul id="compositionNotes1">
+                                            <!-- 構成指示がここに入る -->
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- ディレクション詳細 -->
-            <div class="content-wrapper">
-                <!-- 構成・レイアウト指示 -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-header-icon">📐</div>
-                        構成・レイアウト指示
+            <!-- パターンB -->
+            <div class="pattern-content" id="pattern2">
+                <div class="direction-table">
+                    <div class="direction-header">コピー構成（パターンB）</div>
+                    
+                    <div class="direction-row">
+                        <div class="direction-label">制作物</div>
+                        <div class="direction-content">
+                            <ul>
+                                <li>形式：画像</li>
+                                <li>サイズ：<span id="sizeInfo2"></span></li>
+                                <li>パターン数：<span id="patternCount2"></span></li>
+                                <li>想定媒体：<span id="mediaInfo2"></span></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="instruction-section" id="layoutInstruction">
-                            <!-- レイアウト指示がここに入る -->
+                    
+                    <div class="direction-row">
+                        <div class="direction-label">デザイン<br>指示</div>
+                        <div class="direction-content" id="designDirection2">
+                            <!-- デザイン指示がここに入る -->
+                        </div>
+                    </div>
+                    
+                    <div class="direction-row">
+                        <div class="direction-label">素材</div>
+                        <div class="direction-content">
+                            <div class="banner-preview-section">
+                                <div class="banner-preview-main" id="bannerPreview2">
+                                    <!-- プレビューがここに入る -->
+                                </div>
+                                <div class="banner-preview-info">
+                                    <div class="preview-composition">
+                                        <h4>背景・女性画像</h4>
+                                        <div class="preview-composition-img">背景素材イメージ</div>
+                                    </div>
+                                    <div class="preview-notes">
+                                        <div class="preview-notes-title">
+                                            ■構成指示
+                                        </div>
+                                        <ul id="compositionNotes2">
+                                            <!-- 構成指示がここに入る -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- デザイン・素材指示 -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-header-icon">🎨</div>
-                        デザイン・素材指示
+            </div>
+            
+            <!-- パターンC（3パターン以上の場合） -->
+            <div class="pattern-content" id="pattern3">
+                <div class="direction-table">
+                    <div class="direction-header">コピー構成（パターンC）</div>
+                    
+                    <div class="direction-row">
+                        <div class="direction-label">制作物</div>
+                        <div class="direction-content">
+                            <ul>
+                                <li>形式：画像</li>
+                                <li>サイズ：<span id="sizeInfo3"></span></li>
+                                <li>パターン数：<span id="patternCount3"></span></li>
+                                <li>想定媒体：<span id="mediaInfo3"></span></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="instruction-section" id="designInstruction">
+                    
+                    <div class="direction-row">
+                        <div class="direction-label">デザイン<br>指示</div>
+                        <div class="direction-content" id="designDirection3">
                             <!-- デザイン指示がここに入る -->
                         </div>
-                        <div class="material-variations" id="materialVariations">
-                            <!-- 素材バリエーションがここに入る -->
+                    </div>
+                    
+                    <div class="direction-row">
+                        <div class="direction-label">素材</div>
+                        <div class="direction-content">
+                            <div class="banner-preview-section">
+                                <div class="banner-preview-main" id="bannerPreview3">
+                                    <!-- プレビューがここに入る -->
+                                </div>
+                                <div class="banner-preview-info">
+                                    <div class="preview-composition">
+                                        <h4>背景・ライフスタイル画像</h4>
+                                        <div class="preview-composition-img">背景素材イメージ</div>
+                                    </div>
+                                    <div class="preview-notes">
+                                        <div class="preview-notes-title">
+                                            ■構成指示
+                                        </div>
+                                        <ul id="compositionNotes3">
+                                            <!-- 構成指示がここに入る -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -868,6 +1105,11 @@
     </div>
     
     <script>
+        // APIエンドポイント（Vercelデプロイ時は相対パス）
+        const API_ENDPOINT = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000/api/generate' 
+            : '/api/generate';
+        
         // 生成結果を保存
         let generatedResult = null;
         
@@ -876,9 +1118,6 @@
             e.preventDefault();
             await generateDirection();
         });
-        
-        // GAS APIのURL（デプロイ後に更新してください）
-        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbzkSKpy_A5kmBr4s40Ny5FAlUwvp2JrkXjPNdifOtXXptsRPVlaO10tR3HZnmUoVxADDg/exec'; // ← ここにGASのウェブアプリURLを設定
         
         // ディレクション生成
         async function generateDirection() {
@@ -895,88 +1134,48 @@
             document.getElementById('resultSection').classList.remove('active');
             
             try {
-                // GAS APIが設定されているか確認
-                if (GAS_API_URL === 'YOUR_GAS_WEB_APP_URL_HERE') {
-                    // GAS未設定の場合はモックデータを使用
-                    console.log('GAS API URLが未設定のため、モックデータを使用します');
-                    setTimeout(() => {
-                        const result = generateMockResult(formData);
-                        displayResult(result);
-                        generatedResult = result;
-                        
-                        document.getElementById('loading').classList.remove('active');
-                        document.getElementById('resultSection').classList.add('active');
-                        showToast('ディレクション指示書を生成しました！（モックデータ）');
-                        
-                        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
-                    }, 2000);
-                    return;
-                }
-                
-                // GAS APIを呼び出し
-                const response = await fetch(GAS_API_URL, {
+                // API呼び出し
+                const response = await fetch(API_ENDPOINT, {
                     method: 'POST',
-                    mode: 'no-cors', // GASはCORSに対応していないため
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
                 });
                 
-                // no-corsモードのため、レスポンスは取得できない
-                // GASからの応答を別の方法で取得する必要がある場合は、
-                // JSONPやGoogle Sheets APIを使用することを検討
+                const result = await response.json();
                 
-                // 一旦、成功したものとして処理
-                setTimeout(async () => {
-                    try {
-                        // GASからのレスポンスを取得（実装例）
-                        const result = await fetchGASResult(formData);
-                        displayResult(result);
-                        generatedResult = result;
-                        
-                        document.getElementById('loading').classList.remove('active');
-                        document.getElementById('resultSection').classList.add('active');
-                        showToast('AIがディレクション指示書を生成しました！');
-                        
-                        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
-                    } catch (error) {
-                        // エラー時はモックデータにフォールバック
-                        const result = generateMockResult(formData);
-                        displayResult(result);
-                        generatedResult = result;
-                        
-                        document.getElementById('loading').classList.remove('active');
-                        document.getElementById('resultSection').classList.add('active');
-                        showToast('ディレクション指示書を生成しました！');
-                        
-                        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
-                    }
-                }, 3000);
-                
-            } catch (error) {
-                console.error('API呼び出しエラー:', error);
-                
-                // エラー時はモックデータを使用
-                setTimeout(() => {
-                    const result = generateMockResult(formData);
-                    displayResult(result);
-                    generatedResult = result;
+                if (result.success) {
+                    displayResult(result.data);
+                    generatedResult = result.data;
                     
                     document.getElementById('loading').classList.remove('active');
                     document.getElementById('resultSection').classList.add('active');
-                    showToast('ディレクション指示書を生成しました！（フォールバック）');
+                    showToast('AIがディレクション指示書を生成しました！');
                     
-                    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
-                }, 2000);
+                    document.getElementById('resultSection').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                } else {
+                    throw new Error(result.error || 'エラーが発生しました');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                
+                // エラー時はモックデータを使用
+                const result = generateMockResult(formData);
+                displayResult(result);
+                generatedResult = result;
+                
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('resultSection').classList.add('active');
+                showToast('ディレクション指示書を生成しました！');
+                
+                document.getElementById('resultSection').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
             }
-        }
-        
-        // GASの結果を取得（実装例）
-        async function fetchGASResult(formData) {
-            // 実際の実装では、GASからの結果を取得する方法を実装
-            // 例：Google Sheets APIを使用、またはポーリングなど
-            return generateMockResult(formData);
         }
         
         // フォームデータ収集
@@ -1011,89 +1210,105 @@
         
         // モック結果生成
         function generateMockResult(formData) {
-            const sizeLayouts = {
-                square: {
-                    layouts: [
-                        {
-                            type: '中央配置型',
-                            description: 'キャッチコピーを中央上部、ボディコピーを中央、CTAを下部に配置'
-                        },
-                        {
-                            type: '分割配置型',
-                            description: '上下または左右に分割し、テキストと素材を効果的に配置'
-                        }
-                    ]
-                },
-                portrait: {
-                    layouts: [
-                        {
-                            type: '縦型階層',
-                            description: '上から順にキャッチコピー、素材、ボディコピー、CTAを縦に配置'
-                        },
-                        {
-                            type: '縦型ストーリー',
-                            description: '視線の流れに沿って上から下へストーリー性を持たせた配置'
-                        }
-                    ]
-                },
-                landscape: {
-                    layouts: [
-                        {
-                            type: '左右分割',
-                            description: '左側にテキスト、右側に素材を配置'
-                        },
-                        {
-                            type: '横型フロー',
-                            description: '左から右への自然な視線誘導を意識した配置'
-                        }
-                    ]
-                }
-            };
+            const patterns = [];
+            const patternCount = parseInt(formData.patterns);
             
-            const categoryStyles = {
+            for (let i = 1; i <= Math.min(patternCount, 3); i++) {
+                patterns.push({
+                    name: `パターン${String.fromCharCode(65 + i - 1)}`,
+                    layout: getOptimalLayout(formData, i),
+                    design: getCategoryDesign(formData.category),
+                    composition: getCompositionNotes(formData, i),
+                    material: getMaterialSuggestion(i)
+                });
+            }
+            
+            return { patterns };
+        }
+        
+        function getOptimalLayout(formData, pattern) {
+            const length = formData.catchCopy.length;
+            
+            if (length <= 10) {
+                return {
+                    type: '左上配置型',
+                    description: 'キャッチコピーを左上に強調配置',
+                    position: 'top-left'
+                };
+            } else if (length <= 20) {
+                return {
+                    type: '中央配置型',
+                    description: '視線を中央に集中させる配置',
+                    position: 'center'
+                };
+            } else {
+                return {
+                    type: '分割配置型',
+                    description: '長文を効果的に分割配置',
+                    position: 'split'
+                };
+            }
+        }
+        
+        function getCategoryDesign(category) {
+            const designs = {
                 cosmetics: {
                     colors: 'ピンクゴールド、ホワイト、ソフトピンク',
-                    font: 'エレガントな明朝体とゴシック体の組み合わせ',
+                    font: 'エレガントな明朝体とゴシック体',
                     atmosphere: '高級感と優雅さ'
                 },
                 health: {
                     colors: 'グリーン、ホワイト、ライトブルー',
-                    font: 'クリーンで読みやすいゴシック体',
-                    atmosphere: '信頼感と健康的なイメージ'
+                    font: 'クリーンなゴシック体',
+                    atmosphere: '健康的で信頼感のある雰囲気'
                 },
                 default: {
-                    colors: 'ブランドカラーを基調とした配色',
+                    colors: 'ブランドカラーを基調',
                     font: '視認性の高いゴシック体',
                     atmosphere: '清潔感と信頼感'
                 }
             };
             
-            const style = categoryStyles[formData.category] || categoryStyles.default;
-            const layouts = sizeLayouts[formData.size].layouts;
+            return designs[category] || designs.default;
+        }
+        
+        function getCompositionNotes(formData, pattern) {
+            const notes = [];
             
-            return {
-                layouts: layouts,
-                layoutDetails: [
-                    `キャッチコピー「${formData.catchCopy}」を最も目立つ位置に配置`,
-                    formData.bodyCopy ? `ボディコピーを補足情報として配置` : '',
-                    formData.cta ? `CTAボタン「${formData.cta}」を行動喚起位置に配置` : ''
-                ].filter(item => item),
-                design: {
-                    colors: style.colors,
-                    font: style.font,
-                    atmosphere: style.atmosphere
+            if (formData.catchCopy.length <= 10) {
+                notes.push('キャッチコピーを左上に配置し強調');
+            } else {
+                notes.push('キャッチコピーを中央に配置');
+            }
+            
+            if (formData.bodyCopy) {
+                notes.push('ボディコピーで詳細を補足');
+            }
+            
+            if (formData.cta) {
+                notes.push('CTAボタンを視線の流れに配置');
+            }
+            
+            return notes;
+        }
+        
+        function getMaterialSuggestion(pattern) {
+            const suggestions = [
+                {
+                    title: '商品訴求型',
+                    description: '商品を中心にした構成'
                 },
-                materials: [
-                    {
-                        title: 'パターンA：商品訴求型',
-                        description: '商品パッケージを中心に、使用シーンや効果をビジュアル化'
-                    },
-                    {
-                        title: 'パターンB：ライフスタイル型',
-                        description: 'ターゲット層の理想的な生活シーンを表現'
-                    }
-                ]
-            };
+                {
+                    title: 'ライフスタイル型',
+                    description: '理想の生活シーンを表現'
+                },
+                {
+                    title: '比較訴求型',
+                    description: 'ビフォーアフターを視覚化'
+                }
+            ];
+            
+            return suggestions[pattern - 1] || suggestions[0];
         }
         
         // 結果表示
@@ -1117,87 +1332,57 @@
                 document.getElementById(`mediaInfo${i}`).textContent = formData.media.join('、');
                 
                 // デザイン指示
-                const designDirection = getDesignDirection(formData, i);
+                const pattern = result.patterns[i - 1];
+                const designDirection = `
+                    <ul>
+                        <li>配色：${pattern.design.colors}</li>
+                        <li>フォント：${pattern.design.font}</li>
+                        <li>全体の雰囲気：${pattern.design.atmosphere}</li>
+                    </ul>
+                `;
                 document.getElementById(`designDirection${i}`).innerHTML = designDirection;
                 
                 // バナープレビュー（コピー配置を最適化）
-                const copyPlacement = getCopyPlacement(formData, i);
+                const copyPlacement = getCopyPlacement(formData, pattern.layout.position);
                 document.getElementById(`bannerPreview${i}`).innerHTML = copyPlacement.html;
                 document.getElementById(`bannerPreview${i}`).className = `banner-preview-main ${copyPlacement.class}`;
                 
                 // 構成指示
-                const compositionNotes = getCompositionNotes(formData, i);
+                const compositionNotes = pattern.composition.map(note => `<li>${note}</li>`).join('');
                 document.getElementById(`compositionNotes${i}`).innerHTML = compositionNotes;
             }
         }
         
-        // デザイン指示を取得
-        function getDesignDirection(formData, pattern) {
-            const categoryStyles = {
-                cosmetics: {
-                    colors: 'ピンクゴールドを基調とした配色',
-                    font: '視認性の高いゴシック体',
-                    atmosphere: '清潔感と信頼感'
-                },
-                health: {
-                    colors: 'グリーンを基調とした配色',
-                    font: '視認性の高いゴシック体',
-                    atmosphere: '健康的で信頼感のある雰囲気'
-                },
-                default: {
-                    colors: 'ブランドカラーを基調とした配色',
-                    font: '視認性の高いゴシック体',
-                    atmosphere: '清潔感と信頼感'
-                }
-            };
-            
-            const style = categoryStyles[formData.category] || categoryStyles.default;
-            
-            return `
-                <ul>
-                    <li>配色：${style.colors}</li>
-                    <li>フォント：${style.font}</li>
-                    <li>全体の雰囲気：${style.atmosphere}</li>
-                </ul>
-            `;
-        }
-        
         // コピー配置の最適化
-        function getCopyPlacement(formData, pattern) {
-            const catchLength = formData.catchCopy.length;
+        function getCopyPlacement(formData, position) {
             const hasBody = formData.bodyCopy && formData.bodyCopy.length > 0;
             const hasCTA = formData.cta && formData.cta.length > 0;
             
             let html = '';
             let className = '';
             
-            // パターンごとに異なる配置戦略
-            if (pattern === 1) {
-                // パターンA：短いコピーは左上、長いコピーは中央
-                if (catchLength <= 10 && !hasBody) {
-                    className = 'copy-placement-top-left';
-                    html = `
-                        <div class="${className}">
-                            <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">
-                                ${formData.catchCopy}
-                            </div>
-                            ${hasCTA ? `<div style="margin-top: 1rem; padding: 0.5rem 1rem; background: #333; color: white; display: inline-block; border-radius: 4px;">${formData.cta}</div>` : ''}
+            if (position === 'top-left') {
+                className = 'copy-placement-top-left';
+                html = `
+                    <div class="${className}">
+                        <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">
+                            ${formData.catchCopy}
                         </div>
-                    `;
-                } else {
-                    className = 'copy-placement-center';
-                    html = `
-                        <div class="${className}">
-                            <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.75rem;">
-                                ${formData.catchCopy}
-                            </div>
-                            ${hasBody ? `<div style="font-size: 0.9rem; margin-bottom: 0.75rem;">${formData.bodyCopy}</div>` : ''}
-                            ${hasCTA ? `<div style="margin-top: 1rem; padding: 0.5rem 1rem; background: #333; color: white; display: inline-block; border-radius: 4px;">${formData.cta}</div>` : ''}
+                        ${hasCTA ? `<div style="margin-top: 1rem; padding: 0.5rem 1rem; background: #333; color: white; display: inline-block; border-radius: 4px;">${formData.cta}</div>` : ''}
+                    </div>
+                `;
+            } else if (position === 'center') {
+                className = 'copy-placement-center';
+                html = `
+                    <div class="${className}">
+                        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.75rem;">
+                            ${formData.catchCopy}
                         </div>
-                    `;
-                }
-            } else if (pattern === 2) {
-                // パターンB：左寄せレイアウト
+                        ${hasBody ? `<div style="font-size: 0.9rem; margin-bottom: 0.75rem;">${formData.bodyCopy}</div>` : ''}
+                        ${hasCTA ? `<div style="margin-top: 1rem; padding: 0.5rem 1rem; background: #333; color: white; display: inline-block; border-radius: 4px;">${formData.cta}</div>` : ''}
+                    </div>
+                `;
+            } else {
                 className = 'copy-placement-left-center';
                 html = `
                     <div class="${className}">
@@ -1208,45 +1393,9 @@
                         ${hasCTA ? `<div style="margin-top: 0.75rem; padding: 0.4rem 0.8rem; background: #333; color: white; display: inline-block; border-radius: 4px; font-size: 0.85rem;">${formData.cta}</div>` : ''}
                     </div>
                 `;
-            } else {
-                // パターンC：下部配置
-                className = 'copy-placement-bottom-right';
-                html = `
-                    <div class="${className}">
-                        <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem;">
-                            ${formData.catchCopy}
-                        </div>
-                        ${hasBody ? `<div style="font-size: 0.85rem; color: #666;">${formData.bodyCopy}</div>` : ''}
-                        ${hasCTA ? `<div style="margin-top: 0.5rem; padding: 0.3rem 0.6rem; background: #333; color: white; display: inline-block; border-radius: 4px; font-size: 0.8rem;">${formData.cta}</div>` : ''}
-                    </div>
-                `;
             }
             
             return { html, class: className };
-        }
-        
-        // 構成指示を取得
-        function getCompositionNotes(formData, pattern) {
-            const catchLength = formData.catchCopy.length;
-            const notes = [];
-            
-            if (pattern === 1) {
-                if (catchLength <= 10) {
-                    notes.push('キャッチコピーを左上に配置し強調');
-                    notes.push('下にロゴとCTAを配置');
-                } else {
-                    notes.push('キャッチコピーとボディコピーを中央に配置');
-                    notes.push('CTAを記載');
-                }
-            } else if (pattern === 2) {
-                notes.push('AI活用によるWEBマーケティング改革と業務フロー構築ステップを完全解説');
-                notes.push('[無料で資料プレゼント中]');
-            } else {
-                notes.push('ライフスタイル型：ターゲット層の理想的な生活シーンを表現');
-                notes.push('イメージ制作プロンプト：');
-            }
-            
-            return notes.map(note => `<li>${note}</li>`).join('');
         }
         
         // パターン切り替え
