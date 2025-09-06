@@ -897,52 +897,52 @@ CTA: ${formData.ctaText}
             if (patternType.includes('キャッチコピー')) {
                 // キャッチコピー型のレイアウト
                 pattern.innerHTML = `
-                    <div class="element-catch" style="flex: 2;">
+                    <div class="element-catch" style="flex: 2.5; font-size: 1.4em; padding: 2rem;">
                         ${formData.catchCopy}
                     </div>
                     ${formData.bodyCopy ? `
-                    <div class="element-body" style="flex: 1;">
+                    <div class="element-body" style="flex: 1; padding: 1rem;">
                         ${formData.bodyCopy}
                     </div>` : ''}
-                    <div class="element-image" style="flex: 2;">
-                        商品画像/ビジュアル
+                    <div class="element-image" style="flex: 1.5;">
+                        背景<br>男性画像
                     </div>
-                    <div class="element-cta" style="flex: 1;">
-                        ${formData.ctaText}
+                    <div class="element-cta" style="flex: 0.8;">
+                        ${formData.ctaText} →
                     </div>
                 `;
             } else if (patternType.includes('ビジュアル')) {
                 // ビジュアル型のレイアウト
                 pattern.innerHTML = `
                     <div class="element-image" style="flex: 3;">
-                        商品画像/ビジュアル
+                        背景<br>商品画像
                     </div>
-                    <div class="element-catch" style="flex: 1;">
+                    <div class="element-catch" style="flex: 1.2; font-size: 1.1em;">
                         ${formData.catchCopy}
                     </div>
                     ${formData.bodyCopy ? `
-                    <div class="element-body" style="flex: 0.5;">
+                    <div class="element-body" style="flex: 0.8; font-size: 0.9em;">
                         ${formData.bodyCopy}
                     </div>` : ''}
-                    <div class="element-cta" style="flex: 0.5;">
-                        ${formData.ctaText}
+                    <div class="element-cta" style="flex: 0.6;">
+                        ${formData.ctaText} →
                     </div>
                 `;
             } else {
                 // バランス型のレイアウト
                 pattern.innerHTML = `
-                    <div class="element-catch" style="flex: 1.5;">
+                    <div class="element-catch" style="flex: 1.5; font-size: 1.2em;">
                         ${formData.catchCopy}
                     </div>
                     <div class="element-image" style="flex: 2;">
-                        商品画像/ビジュアル
+                        背景<br>商品画像
                     </div>
                     ${formData.bodyCopy ? `
                     <div class="element-body" style="flex: 1;">
                         ${formData.bodyCopy}
                     </div>` : ''}
-                    <div class="element-cta" style="flex: 0.5;">
-                        ${formData.ctaText}
+                    <div class="element-cta" style="flex: 0.7;">
+                        ${formData.ctaText} →
                     </div>
                 `;
             }
