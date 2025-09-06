@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Copy Generator Pro - 広告コピー自動生成ツール</title>
+    <title>バナー広告制作ディレクションツール | Professional Banner Direction Tool</title>
     <style>
         * {
             margin: 0;
@@ -12,35 +12,37 @@
         }
         
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #dbeafe;
-            --secondary: #7c3aed;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --dark: #111827;
-            --gray-900: #1f2937;
-            --gray-700: #374151;
-            --gray-500: #6b7280;
-            --gray-400: #9ca3af;
-            --gray-300: #d1d5db;
-            --gray-200: #e5e7eb;
-            --gray-100: #f3f4f6;
-            --gray-50: #f9fafb;
-            --white: #ffffff;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            --radius: 0.75rem;
-            --radius-lg: 1rem;
+            --primary: #5B48D0;
+            --primary-dark: #4938B0;
+            --primary-light: #F5F3FF;
+            --secondary: #FF6B6B;
+            --success: #51CF66;
+            --warning: #FFD43B;
+            --info: #339AF0;
+            --dark: #212529;
+            --gray-900: #343A40;
+            --gray-800: #495057;
+            --gray-700: #6C757D;
+            --gray-600: #ADB5BD;
+            --gray-500: #CED4DA;
+            --gray-400: #DEE2E6;
+            --gray-300: #E9ECEF;
+            --gray-200: #F1F3F5;
+            --gray-100: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-md: 0 6px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 24px rgba(0,0,0,0.2);
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
-            background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: var(--dark);
             line-height: 1.6;
@@ -49,17 +51,15 @@
         /* ヘッダー */
         .header {
             background: var(--white);
-            border-bottom: 1px solid var(--gray-200);
             padding: 1.5rem 0;
+            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
         }
         
         .header-container {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
             display: flex;
@@ -68,19 +68,21 @@
         }
         
         .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--dark);
         }
         
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -88,82 +90,130 @@
             font-size: 1.5rem;
         }
         
-        .header-badge {
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 100px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        
         /* メインコンテナ */
         .container {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
         
-        /* フォームレイアウト */
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+        /* プログレスバー */
+        .progress-container {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
             margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
         }
         
-        @media (max-width: 1024px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .progress-step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray-300);
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+        
+        .progress-step.active .progress-step-circle {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .progress-step.completed .progress-step-circle {
+            background: var(--success);
+            color: white;
+        }
+        
+        .progress-step-label {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+        
+        .progress-line {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gray-300);
+            z-index: 1;
+        }
+        
+        .progress-line-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success) 0%, #667eea 50%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.5s ease;
         }
         
         /* カード */
         .card {
             background: var(--white);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
-            transition: box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+            transform: translateY(0);
+            transition: var(--transition);
         }
         
         .card:hover {
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.25);
         }
         
         .card-header {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
-            border-bottom: 1px solid var(--gray-200);
-        }
-        
-        .card-title {
+            padding: 1.75rem;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-bottom: 2px solid var(--gray-200);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--dark);
         }
         
-        .card-icon {
+        .card-header-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
+            font-size: 1rem;
         }
         
         .card-body {
-            padding: 1.5rem;
+            padding: 2rem;
         }
         
         /* フォーム要素 */
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
         }
         
         .form-label {
@@ -171,47 +221,31 @@
             align-items: center;
             gap: 0.5rem;
             font-weight: 600;
-            color: var(--gray-900);
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
+            color: var(--gray-800);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
         }
         
         .required {
-            color: var(--danger);
-            font-size: 1rem;
-        }
-        
-        .recommended {
-            background: var(--warning);
-            color: var(--white);
-            padding: 0.125rem 0.375rem;
-            border-radius: 4px;
-            font-size: 0.625rem;
-            font-weight: 600;
-            text-transform: uppercase;
+            color: var(--secondary);
+            font-size: 1.2rem;
         }
         
         .optional {
-            background: var(--gray-400);
-            color: var(--white);
-            padding: 0.125rem 0.375rem;
-            border-radius: 4px;
-            font-size: 0.625rem;
-            font-weight: 600;
-            text-transform: uppercase;
+            color: var(--gray-600);
+            font-weight: normal;
+            font-size: 0.85rem;
         }
         
         .form-input,
         .form-textarea,
         .form-select {
             width: 100%;
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--gray-200);
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--gray-300);
             border-radius: var(--radius);
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: var(--transition);
             background: var(--white);
         }
         
@@ -220,85 +254,135 @@
         .form-select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
         }
         
         .form-textarea {
-            min-height: 100px;
+            min-height: 120px;
             resize: vertical;
             font-family: inherit;
         }
         
         .form-helper {
-            font-size: 0.75rem;
-            color: var(--gray-500);
-            margin-top: 0.25rem;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: start;
+            gap: 0.25rem;
         }
         
-        /* 数値入力 */
-        .number-input-group {
+        /* ラジオボタングループ */
+        .radio-group {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
         }
         
-        .number-input-wrapper {
+        .radio-option {
             position: relative;
         }
         
-        .number-input-label {
-            font-size: 0.75rem;
-            color: var(--gray-600);
-            margin-bottom: 0.25rem;
-        }
-        
-        .number-input {
-            width: 100%;
-            padding: 0.5rem 2.5rem 0.5rem 0.75rem;
-            border: 2px solid var(--gray-200);
-            border-radius: var(--radius);
-            font-size: 0.95rem;
-        }
-        
-        .number-input-suffix {
+        .radio-option input[type="radio"] {
             position: absolute;
-            right: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray-500);
-            font-size: 0.875rem;
-            pointer-events: none;
+            opacity: 0;
+        }
+        
+        .radio-option-label {
+            display: block;
+            padding: 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--white);
+            font-weight: 500;
+        }
+        
+        .radio-option input[type="radio"]:checked + .radio-option-label {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+        
+        .radio-option-label:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .radio-option-label small {
+            display: block;
+            color: var(--gray-600);
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* チェックボックスグループ */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .checkbox-option {
+            position: relative;
+        }
+        
+        .checkbox-option input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .checkbox-option-label {
+            display: block;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        
+        .checkbox-option input[type="checkbox"]:checked + .checkbox-option-label {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            color: var(--primary-dark);
+            font-weight: 600;
         }
         
         /* ボタン */
         .btn {
-            padding: 0.875rem 2rem;
+            padding: 1rem 2rem;
             border-radius: var(--radius);
             font-weight: 600;
             font-size: 1rem;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
+            min-width: 150px;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            box-shadow: var(--shadow-md);
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
         }
         
-        .btn-primary:active {
-            transform: translateY(0);
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
         
         .btn-secondary {
@@ -311,125 +395,192 @@
             background: var(--primary-light);
         }
         
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
         .btn-block {
             width: 100%;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
             justify-content: center;
+            margin-top: 2rem;
         }
         
-        .btn-lg {
-            padding: 1.25rem 3rem;
-            font-size: 1.125rem;
+        /* 結果表示 */
+        .result-section {
+            display: none;
         }
         
-        /* 生成ボタンエリア */
-        .generate-section {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+        .result-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* バナープレビュー */
+        .banner-preview {
+            background: var(--gray-100);
+            border: 2px dashed var(--gray-400);
             border-radius: var(--radius-lg);
             padding: 2rem;
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        /* 結果表示エリア */
-        .results-section {
-            margin-top: 3rem;
-        }
-        
-        .results-header {
+            margin-bottom: 2rem;
+            position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
+            justify-content: center;
+            min-height: 400px;
+            text-align: center;
         }
         
-        .results-title {
-            font-size: 1.875rem;
-            font-weight: 800;
-            color: var(--dark);
+        .banner-preview.square {
+            aspect-ratio: 1/1;
+            max-width: 400px;
+            margin: 0 auto 2rem;
         }
         
-        .copy-result {
-            background: var(--white);
+        .banner-preview.portrait {
+            aspect-ratio: 9/16;
+            max-width: 300px;
+            margin: 0 auto 2rem;
+        }
+        
+        .banner-preview.landscape {
+            aspect-ratio: 16/9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .banner-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            pointer-events: none;
+        }
+        
+        .banner-grid-line {
+            border: 1px dashed var(--gray-400);
+        }
+        
+        /* 指示書セクション */
+        .instruction-section {
+            background: var(--gray-50);
             border-radius: var(--radius-lg);
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .copy-result:hover {
-            box-shadow: var(--shadow-xl);
-            transform: translateY(-2px);
-        }
-        
-        .copy-number {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .copy-content {
-            margin-bottom: 1rem;
-        }
-        
-        .copy-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--gray-500);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-        }
-        
-        .copy-text {
-            font-size: 1.125rem;
-            color: var(--dark);
-            line-height: 1.6;
-            padding: 1rem;
-            background: var(--gray-50);
-            border-radius: var(--radius);
             border-left: 4px solid var(--primary);
         }
         
-        .copy-actions {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: flex-end;
-        }
-        
-        .copy-btn {
-            padding: 0.5rem 1rem;
-            background: var(--white);
-            border: 1px solid var(--gray-300);
-            border-radius: var(--radius);
-            color: var(--gray-700);
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .instruction-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 0.375rem;
+            gap: 0.5rem;
         }
         
-        .copy-btn:hover {
-            background: var(--gray-50);
+        .instruction-content {
+            color: var(--gray-800);
+            line-height: 1.8;
+        }
+        
+        .instruction-content ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .instruction-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .instruction-content strong {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+        
+        /* 素材バリエーション */
+        .material-variations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .material-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            border: 2px solid var(--gray-300);
+            transition: var(--transition);
+        }
+        
+        .material-card:hover {
             border-color: var(--primary);
-            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .material-card-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .material-card-description {
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .material-prompt {
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--gray-800);
+            border: 1px solid var(--gray-300);
+        }
+        
+        /* エクスポートセクション */
+        .export-section {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .export-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
         }
         
         /* ローディング */
         .loading {
             display: none;
             text-align: center;
-            padding: 3rem;
+            padding: 4rem;
         }
         
         .loading.active {
@@ -437,22 +588,17 @@
         }
         
         .spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid var(--gray-200);
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--gray-300);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.5rem;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-        
-        .loading-text {
-            color: var(--gray-600);
-            font-size: 1rem;
         }
         
         /* トースト */
@@ -465,12 +611,12 @@
             padding: 1rem 1.5rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow-xl);
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            z-index: 1000;
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 1000;
         }
         
         .toast.show {
@@ -481,35 +627,30 @@
             font-size: 1.25rem;
         }
         
-        /* アニメーション */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
-        }
-        
         /* レスポンシブ */
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
             .container {
-                padding: 1rem;
+                padding: 1.5rem 1rem;
             }
             
-            .card-body {
-                padding: 1rem;
+            .radio-group {
+                grid-template-columns: 1fr;
             }
             
-            .btn-lg {
-                padding: 1rem 2rem;
-                font-size: 1rem;
+            .checkbox-group {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .material-variations {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -519,701 +660,845 @@
     <header class="header">
         <div class="header-container">
             <div class="logo">
-                <div class="logo-icon">✨</div>
-                <span>AI Copy Generator Pro</span>
-            </div>
-            <div style="display: flex; gap: 1rem; align-items: center;">
-                <button class="btn btn-secondary" onclick="fillSampleData()" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
-                    <span>📝</span>
-                    <span>サンプル入力</span>
-                </button>
-                <div class="header-badge">Powered by Gemini AI</div>
+                <div class="logo-icon">🎨</div>
+                <span>バナー広告制作ディレクションツール</span>
             </div>
         </div>
     </header>
 
     <!-- メインコンテンツ -->
     <main class="container">
-        <form id="copyForm">
-            <div class="form-grid">
-                <!-- 左カラム -->
-                <div>
-                    <!-- 商品情報 -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">
-                                <div class="card-icon">📦</div>
-                                商品情報
-                            </h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">
-                                    商品名 <span class="required">*</span>
-                                </label>
-                                <input type="text" class="form-input" id="productName" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    商品カテゴリ <span class="required">*</span>
-                                </label>
-                                <select class="form-select" id="productCategory" required>
-                                    <option value="">選択してください</option>
-                                    <option value="cosmetics">化粧品・美容</option>
-                                    <option value="health">健康・サプリメント</option>
-                                    <option value="food">食品・飲料</option>
-                                    <option value="fashion">ファッション・アパレル</option>
-                                    <option value="electronics">家電・電子機器</option>
-                                    <option value="education">教育・学習</option>
-                                    <option value="service">サービス・サブスク</option>
-                                    <option value="btob">BtoB・ビジネス</option>
-                                    <option value="other">その他</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    自社商品の強み・特徴 <span class="required">*</span>
-                                </label>
-                                <textarea class="form-textarea" id="productStrength" required placeholder="例：独自の技術、特許、成分、機能など"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    独自の価値・USP <span class="recommended">推奨</span>
-                                </label>
-                                <textarea class="form-textarea" id="productUSP" placeholder="例：他社にはない唯一無二の価値"></textarea>
-                            </div>
+        <!-- プログレスバー -->
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="progress-line">
+                    <div class="progress-line-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-step active" data-step="1">
+                    <div class="progress-step-circle">1</div>
+                    <div class="progress-step-label">商品情報</div>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <div class="progress-step-circle">2</div>
+                    <div class="progress-step-label">制作物設定</div>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <div class="progress-step-circle">3</div>
+                    <div class="progress-step-label">コピー設定</div>
+                </div>
+                <div class="progress-step" data-step="4">
+                    <div class="progress-step-circle">4</div>
+                    <div class="progress-step-label">デザイン設定</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 入力フォーム -->
+        <form id="bannerForm">
+            <!-- ステップ1: 商品基本情報 -->
+            <div class="card form-step" data-step="1">
+                <div class="card-header">
+                    <div class="card-header-icon">📦</div>
+                    商品基本情報
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">
+                            商品名 <span class="required">*</span>
+                        </label>
+                        <input type="text" class="form-input" id="productName" required
+                               placeholder="例：プレミアムエイジングケア美容液">
+                        <div class="form-helper">
+                            <span>ℹ️</span> 正式な商品名を入力してください
                         </div>
                     </div>
                     
-                    <!-- ターゲット情報 -->
-                    <div class="card" style="margin-top: 2rem;">
-                        <div class="card-header">
-                            <h2 class="card-title">
-                                <div class="card-icon">👥</div>
-                                ターゲット情報
-                            </h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">
-                                    ペルソナ <span class="required">*</span>
-                                </label>
-                                <textarea class="form-textarea" id="targetPersona" required placeholder="例：30代女性、子育て中、健康意識が高い"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    インサイト <span class="required">*</span>
-                                </label>
-                                <textarea class="form-textarea" id="targetInsight" required placeholder="例：時間がなくても美しくありたい、家族の健康を守りたい"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    課題が顕在化する状況 <span class="recommended">推奨</span>
-                                </label>
-                                <textarea class="form-textarea" id="targetSituation" placeholder="例：朝の準備時、買い物中、SNSを見ている時"></textarea>
-                            </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            カテゴリ <span class="required">*</span>
+                        </label>
+                        <select class="form-select" id="category" required>
+                            <option value="">選択してください</option>
+                            <option value="cosmetics">化粧品・美容</option>
+                            <option value="health">健康食品・サプリメント</option>
+                            <option value="fashion">ファッション・アパレル</option>
+                            <option value="food">食品・飲料</option>
+                            <option value="electronics">家電・電子機器</option>
+                            <option value="service">サービス・アプリ</option>
+                            <option value="education">教育・学習</option>
+                            <option value="realestate">不動産・住宅</option>
+                            <option value="finance">金融・保険</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            訴求方針 <span class="optional">(任意)</span>
+                        </label>
+                        <textarea class="form-textarea" id="appealStrategy"
+                                  placeholder="例：30代女性の肌悩みに特化し、独自成分による即効性と安全性を強調"></textarea>
+                        <div class="form-helper">
+                            <span>💡</span> ターゲットや強みを具体的に記載すると、より効果的な指示書が作成されます
                         </div>
                     </div>
                 </div>
-                
-                <!-- 右カラム -->
-                <div>
-                    <!-- 訴求情報 -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">
-                                <div class="card-icon">💬</div>
-                                訴求情報
-                            </h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">
-                                    メイン訴求軸 <span class="required">*</span>
+            </div>
+            
+            <!-- ステップ2: 制作物情報 -->
+            <div class="card form-step" data-step="2" style="display: none;">
+                <div class="card-header">
+                    <div class="card-header-icon">⚙️</div>
+                    制作物情報
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">
+                            サイズ <span class="required">*</span>
+                        </label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="size" id="size-square" value="square" checked>
+                                <label for="size-square" class="radio-option-label">
+                                    正方形
+                                    <small>1080×1080</small>
                                 </label>
-                                <input type="text" class="form-input" id="mainAppealAxis" required placeholder="例：効果実感、価格、利便性">
                             </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    メイン訴求内容 <span class="required">*</span>
+                            <div class="radio-option">
+                                <input type="radio" name="size" id="size-portrait" value="portrait">
+                                <label for="size-portrait" class="radio-option-label">
+                                    縦長
+                                    <small>1080×1920</small>
                                 </label>
-                                <textarea class="form-textarea" id="mainAppealContent" required placeholder="例：1週間で効果を実感、業界最安値"></textarea>
                             </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    サブ訴求軸 <span class="recommended">推奨</span>
+                            <div class="radio-option">
+                                <input type="radio" name="size" id="size-landscape" value="landscape">
+                                <label for="size-landscape" class="radio-option-label">
+                                    横長
+                                    <small>1200×628</small>
                                 </label>
-                                <input type="text" class="form-input" id="subAppealAxis" placeholder="例：安全性、実績">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    サブ訴求内容 <span class="recommended">推奨</span>
-                                </label>
-                                <textarea class="form-textarea" id="subAppealContent" placeholder="例：医師監修、累計100万個突破"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    コンセプト <span class="recommended">推奨</span>
-                                </label>
-                                <textarea class="form-textarea" id="concept" placeholder="例：毎日を輝かせる、あなたのパートナー"></textarea>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- アウトプット設定 -->
-                    <div class="card" style="margin-top: 2rem;">
-                        <div class="card-header">
-                            <h2 class="card-title">
-                                <div class="card-icon">⚙️</div>
-                                アウトプット設定
-                            </h2>
+                    <div class="form-group">
+                        <label class="form-label">
+                            パターン数 <span class="required">*</span>
+                        </label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="patterns" id="patterns-1" value="1">
+                                <label for="patterns-1" class="radio-option-label">1</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="patterns" id="patterns-2" value="2">
+                                <label for="patterns-2" class="radio-option-label">2</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="patterns" id="patterns-3" value="3" checked>
+                                <label for="patterns-3" class="radio-option-label">3</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="patterns" id="patterns-4" value="4">
+                                <label for="patterns-4" class="radio-option-label">4</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="patterns" id="patterns-5" value="5">
+                                <label for="patterns-5" class="radio-option-label">5</label>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">
-                                    プラットフォーム <span class="recommended">推奨</span>
-                                </label>
-                                <select class="form-select" id="platform">
-                                    <option value="">選択してください</option>
-                                    <option value="google">Google広告</option>
-                                    <option value="facebook">Facebook/Instagram</option>
-                                    <option value="yahoo">Yahoo!広告</option>
-                                    <option value="line">LINE広告</option>
-                                    <option value="twitter">X(Twitter)広告</option>
-                                    <option value="tiktok">TikTok広告</option>
-                                    <option value="lp">ランディングページ</option>
-                                    <option value="banner">バナー広告</option>
-                                    <option value="email">メール</option>
-                                </select>
+                        <div class="form-helper">
+                            <span>💡</span> A/Bテストを考慮して3パターン以上を推奨します
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            想定媒体 <span class="required">*</span>
+                        </label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="media-instagram" value="Instagram" checked>
+                                <label for="media-instagram" class="checkbox-option-label">Instagram</label>
                             </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    目的 <span class="recommended">推奨</span>
-                                </label>
-                                <select class="form-select" id="purpose">
-                                    <option value="">選択してください</option>
-                                    <option value="conversion">コンバージョン獲得</option>
-                                    <option value="awareness">認知拡大</option>
-                                    <option value="consideration">検討促進</option>
-                                    <option value="retention">リテンション</option>
-                                    <option value="branding">ブランディング</option>
-                                </select>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="media-facebook" value="Facebook" checked>
+                                <label for="media-facebook" class="checkbox-option-label">Facebook</label>
                             </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    要望 <span class="recommended">推奨</span>
-                                </label>
-                                <textarea class="form-textarea" id="request" placeholder="例：若い世代に響く表現、信頼感を重視"></textarea>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="media-x" value="X">
+                                <label for="media-x" class="checkbox-option-label">X (Twitter)</label>
                             </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    必要パターン数 <span class="required">*</span>
-                                </label>
-                                <input type="number" class="form-input" id="patternCount" min="1" max="10" value="3" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">文字数設定</label>
-                                <div class="number-input-group">
-                                    <div class="number-input-wrapper">
-                                        <div class="number-input-label">
-                                            キャッチコピー <span class="required">*</span>
-                                        </div>
-                                        <input type="number" class="number-input" id="catchCopyLength" value="30" min="10" max="100" required>
-                                        <span class="number-input-suffix">文字</span>
-                                    </div>
-                                    
-                                    <div class="number-input-wrapper">
-                                        <div class="number-input-label">
-                                            ボディコピー <span class="optional">任意</span>
-                                        </div>
-                                        <input type="number" class="number-input" id="bodyCopyLength" value="80" min="20" max="200">
-                                        <span class="number-input-suffix">文字</span>
-                                    </div>
-                                    
-                                    <div class="number-input-wrapper">
-                                        <div class="number-input-label">
-                                            CTA <span class="optional">任意</span>
-                                        </div>
-                                        <input type="number" class="number-input" id="ctaLength" value="15" min="5" max="50">
-                                        <span class="number-input-suffix">文字</span>
-                                    </div>
-                                </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="media-line" value="LINE">
+                                <label for="media-line" class="checkbox-option-label">LINE</label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- 生成ボタン -->
-            <div class="generate-section">
-                <button type="submit" class="btn btn-primary btn-lg" id="generateBtn">
-                    <span>✨</span>
-                    <span>AIコピーを生成</span>
-                </button>
-                <p class="form-helper" style="margin-top: 1rem;">Gemini AIが最適な広告コピーを生成します</p>
-                <p class="form-helper" style="margin-top: 0.5rem; color: var(--gray-500); font-size: 0.75rem;">
-                    ※ 必須項目（<span style="color: var(--danger);">*</span>）をすべて入力してください
-                </p>
-                <div id="errorMessage" style="margin-top: 1rem; padding: 1rem; background: var(--danger); color: white; border-radius: var(--radius); display: none;">
-                    <strong>エラー:</strong> <span id="errorText"></span>
+            <!-- ステップ3: コピー情報 -->
+            <div class="card form-step" data-step="3" style="display: none;">
+                <div class="card-header">
+                    <div class="card-header-icon">✏️</div>
+                    コピー情報
                 </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">
+                            キャッチコピー <span class="required">*</span>
+                        </label>
+                        <input type="text" class="form-input" id="catchCopy" required
+                               placeholder="例：たった10秒で、10歳若返る肌へ">
+                        <div class="form-helper">
+                            <span>ℹ️</span> インパクトのある短いフレーズを入力してください（15文字以内推奨）
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            ボディーコピー <span class="optional">(任意)</span>
+                        </label>
+                        <textarea class="form-textarea" id="bodyCopy"
+                                  placeholder="例：医療レベルの独自成分配合。95%のユーザーが効果を実感"></textarea>
+                        <div class="form-helper">
+                            <span>💡</span> 商品の特徴や根拠を補足する文章を入力してください
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            CTA (Call To Action) <span class="optional">(任意)</span>
+                        </label>
+                        <input type="text" class="form-input" id="cta"
+                               placeholder="例：今すぐ試してみる">
+                        <div class="form-helper">
+                            <span>ℹ️</span> ユーザーに取ってほしい行動を促す文言を入力してください
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ステップ4: 素材/デザイン情報 -->
+            <div class="card form-step" data-step="4" style="display: none;">
+                <div class="card-header">
+                    <div class="card-header-icon">🎨</div>
+                    素材/デザイン情報
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">
+                            素材イメージ <span class="optional">(任意)</span>
+                        </label>
+                        <textarea class="form-textarea" id="materialImage"
+                                  placeholder="例：高級感のある女性の横顔、キラキラした光の粒子、商品パッケージ"></textarea>
+                        <div class="form-helper">
+                            <span>💡</span> 使用したい画像や素材のイメージを具体的に記載してください
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            デザインイメージ <span class="optional">(任意)</span>
+                        </label>
+                        <textarea class="form-textarea" id="designImage"
+                                  placeholder="例：高級感、エレガント、ゴールドとホワイトを基調とした配色"></textarea>
+                        <div class="form-helper">
+                            <span>💡</span> 全体的なトーンやスタイル、色の希望などを記載してください
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ボタン -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
+                    ← 前へ
+                </button>
+                <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
+                    次へ →
+                </button>
+                <button type="submit" class="btn btn-success" id="generateBtn" style="display: none;">
+                    <span>✨</span> ディレクション指示書を生成
+                </button>
             </div>
         </form>
         
         <!-- ローディング -->
         <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p class="loading-text">AIが最適なコピーを生成中...</p>
+            <div class="card">
+                <div class="card-body">
+                    <div class="spinner"></div>
+                    <h3>AIがディレクション指示書を生成中...</h3>
+                    <p style="color: var(--gray-600); margin-top: 1rem;">
+                        マーケティング戦略に基づいた最適な指示書を作成しています
+                    </p>
+                </div>
+            </div>
         </div>
         
-        <!-- 結果表示エリア -->
-        <div class="results-section" id="resultsSection" style="display: none;">
-            <div class="results-header">
-                <h2 class="results-title">生成されたコピー</h2>
-                <button class="btn btn-secondary" onclick="copyAll()">
-                    <span>📋</span>
-                    <span>すべてコピー</span>
-                </button>
+        <!-- 結果表示 -->
+        <div class="result-section" id="resultSection">
+            <!-- バナープレビュー -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-icon">👁️</div>
+                    バナー構成プレビュー
+                </div>
+                <div class="card-body">
+                    <div class="banner-preview" id="bannerPreview">
+                        <div class="banner-grid">
+                            <div class="banner-grid-line"></div>
+                            <div class="banner-grid-line"></div>
+                            <div class="banner-grid-line"></div>
+                            <div class="banner-grid-line"></div>
+                            <div class="banner-grid-line"></div>
+                            <div class="banner-grid-line"></div>
+                            <div class="banner-grid-line"></div>
+                            <div class="banner-grid-line"></div>
+                            <div class="banner-grid-line"></div>
+                        </div>
+                        <div id="previewContent"></div>
+                    </div>
+                </div>
             </div>
-            <div id="resultsContainer"></div>
+            
+            <!-- 構成・レイアウト指示 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-icon">📐</div>
+                    構成・レイアウト指示
+                </div>
+                <div class="card-body">
+                    <div class="instruction-section" id="layoutInstruction">
+                        <!-- レイアウト指示がここに入る -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- デザイン指示 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-icon">🎨</div>
+                    デザイン指示
+                </div>
+                <div class="card-body">
+                    <div class="instruction-section" id="designInstruction">
+                        <!-- デザイン指示がここに入る -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 素材指示 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-icon">🖼️</div>
+                    素材指示
+                </div>
+                <div class="card-body">
+                    <div class="instruction-section">
+                        <div class="instruction-title">
+                            <span>📝</span> 背景素材パターン
+                        </div>
+                        <div class="material-variations" id="materialVariations">
+                            <!-- 素材バリエーションがここに入る -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- エクスポート -->
+            <div class="export-section">
+                <h3 style="margin-bottom: 1rem;">📦 ディレクション指示書のエクスポート</h3>
+                <p style="color: var(--gray-700); margin-bottom: 1.5rem;">
+                    生成された指示書をデザイナーに共有してください
+                </p>
+                <div class="export-buttons">
+                    <button class="btn btn-secondary" onclick="copyToClipboard()">
+                        📋 クリップボードにコピー
+                    </button>
+                    <button class="btn btn-secondary" onclick="downloadAsHTML()">
+                        📄 HTMLでダウンロード
+                    </button>
+                    <button class="btn btn-secondary" onclick="downloadAsText()">
+                        📝 テキストでダウンロード
+                    </button>
+                    <button class="btn btn-primary" onclick="regenerate()">
+                        🔄 再生成
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
     
     <!-- トースト -->
     <div class="toast" id="toast">
-        <span class="toast-icon">✓</span>
-        <span class="toast-message"></span>
+        <span class="toast-icon" id="toastIcon">✅</span>
+        <span id="toastMessage"></span>
     </div>
     
     <script>
-        // Gemini API設定
-        const GEMINI_API_KEY = 'AIzaSyCn7c0_lUZFyCIt5al2o13ZiecfwV9NOeI';
-        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
+        // 現在のステップ
+        let currentStep = 1;
+        const totalSteps = 4;
         
-        // ページ読み込み時の初期化
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('アプリケーション初期化完了');
+        // 生成結果を保存
+        let generatedResult = null;
+        
+        // ステップ変更
+        function changeStep(direction) {
+            const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            currentStepElement.style.display = 'none';
             
-            // フォームの存在確認
-            const form = document.getElementById('copyForm');
-            if (!form) {
-                console.error('フォームが見つかりません');
-                return;
+            // 現在のステップを完了済みにマーク
+            if (direction > 0) {
+                document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.add('completed');
             }
             
-            // 生成ボタンの存在確認
-            const btn = document.getElementById('generateBtn');
-            if (btn) {
-                console.log('生成ボタン検出完了');
-            } else {
-                console.error('生成ボタンが見つかりません');
-            }
-        });
-        
-        // サンプルデータ入力関数
-        function fillSampleData() {
-            console.log('サンプルデータ入力開始');
+            currentStep += direction;
             
-            // 商品情報
-            document.getElementById('productName').value = 'スマートモップ Pro';
-            document.getElementById('productCategory').value = 'electronics';
-            document.getElementById('productStrength').value = '独自のマイクロファイバー技術により、99.9%の除菌効果を実現。水洗い可能で繰り返し使える経済的な設計。';
-            document.getElementById('productUSP').value = '業界初のAI搭載で汚れを自動検知。特許取得済みの独自構造により、従来品の3倍の吸着力を実現。';
+            // ステップの範囲チェック
+            if (currentStep < 1) currentStep = 1;
+            if (currentStep > totalSteps) currentStep = totalSteps;
             
-            // ターゲット情報
-            document.getElementById('targetPersona').value = '30-40代の共働き主婦。仕事と家事の両立で忙しく、効率的な家事を重視している。';
-            document.getElementById('targetInsight').value = '限られた時間で家族の健康を守りたい。掃除の時間を短縮して、家族との時間を大切にしたい。';
-            document.getElementById('targetSituation').value = '朝の忙しい時間、週末の掃除時間、子供がこぼした時など';
+            // 新しいステップを表示
+            const newStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            newStepElement.style.display = 'block';
             
-            // 訴求情報
-            document.getElementById('mainAppealAxis').value = '時短効果';
-            document.getElementById('mainAppealContent').value = '従来の半分の時間で、2倍キレイに。忙しいあなたの味方です。';
-            document.getElementById('subAppealAxis').value = '安全性';
-            document.getElementById('subAppealContent').value = '化学薬品不使用で、お子様やペットがいても安心';
-            document.getElementById('concept').value = '家族の健康を守る、掃除習慣作りのパートナー';
+            // プログレスバー更新
+            updateProgress();
             
-            // アウトプット設定
-            document.getElementById('platform').value = 'facebook';
-            document.getElementById('purpose').value = 'conversion';
-            document.getElementById('request').value = '共感を呼ぶ、親しみやすい表現で';
-            
-            showToast('サンプルデータを入力しました');
+            // ボタンの表示/非表示
+            updateButtons();
         }
         
-        // フォーム送信処理
-        document.getElementById('copyForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            console.log('フォーム送信開始');
-            
-            // 必須フィールドの検証
-            const requiredFields = [
-                'productName', 'productCategory', 'productStrength',
-                'targetPersona', 'targetInsight',
-                'mainAppealAxis', 'mainAppealContent',
-                'patternCount', 'catchCopyLength'
-            ];
-            
-            let hasError = false;
-            for (const fieldId of requiredFields) {
-                const field = document.getElementById(fieldId);
-                if (!field || !field.value) {
-                    console.error(`必須フィールドが未入力: ${fieldId}`);
-                    hasError = true;
-                    if (field) {
-                        field.style.borderColor = 'var(--danger)';
-                        setTimeout(() => {
-                            field.style.borderColor = '';
-                        }, 3000);
-                    }
+        // プログレスバー更新
+        function updateProgress() {
+            // アクティブステップの更新
+            document.querySelectorAll('.progress-step').forEach(step => {
+                step.classList.remove('active');
+                const stepNum = parseInt(step.dataset.step);
+                if (stepNum === currentStep) {
+                    step.classList.add('active');
                 }
-            }
+            });
             
-            if (hasError) {
-                showToast('必須項目をすべて入力してください', 'warning');
+            // プログレスバーの幅更新
+            const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+        }
+        
+        // ボタン表示更新
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const generateBtn = document.getElementById('generateBtn');
+            
+            // 前へボタン
+            prevBtn.style.display = currentStep > 1 ? 'inline-flex' : 'none';
+            
+            // 次へボタンと生成ボタン
+            if (currentStep === totalSteps) {
+                nextBtn.style.display = 'none';
+                generateBtn.style.display = 'inline-flex';
+            } else {
+                nextBtn.style.display = 'inline-flex';
+                generateBtn.style.display = 'none';
+            }
+        }
+        
+        // フォーム送信
+        document.getElementById('bannerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await generateDirection();
+        });
+        
+        // ディレクション生成
+        async function generateDirection() {
+            const formData = collectFormData();
+            
+            // バリデーション
+            if (!validateForm(formData)) {
+                showToast('必須項目を入力してください', 'error');
                 return;
             }
             
-            // フォームデータの取得
-            const formData = {
-                product: {
-                    name: document.getElementById('productName').value,
-                    category: document.getElementById('productCategory').value,
-                    strength: document.getElementById('productStrength').value,
-                    usp: document.getElementById('productUSP').value
+            // UI更新
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('resultSection').classList.remove('active');
+            
+            // 仮の生成処理（実際にはAPIを呼び出す）
+            setTimeout(() => {
+                const result = generateMockResult(formData);
+                displayResult(result);
+                generatedResult = result;
+                
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('resultSection').classList.add('active');
+                showToast('ディレクション指示書を生成しました！');
+                
+                // スクロール
+                document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        }
+        
+        // フォームデータ収集
+        function collectFormData() {
+            const selectedMedia = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                selectedMedia.push(checkbox.value);
+            });
+            
+            return {
+                productName: document.getElementById('productName').value,
+                category: document.getElementById('category').value,
+                appealStrategy: document.getElementById('appealStrategy').value,
+                size: document.querySelector('input[name="size"]:checked').value,
+                patterns: document.querySelector('input[name="patterns"]:checked').value,
+                media: selectedMedia,
+                catchCopy: document.getElementById('catchCopy').value,
+                bodyCopy: document.getElementById('bodyCopy').value,
+                cta: document.getElementById('cta').value,
+                materialImage: document.getElementById('materialImage').value,
+                designImage: document.getElementById('designImage').value
+            };
+        }
+        
+        // バリデーション
+        function validateForm(formData) {
+            return formData.productName && 
+                   formData.category && 
+                   formData.size && 
+                   formData.patterns && 
+                   formData.media.length > 0 && 
+                   formData.catchCopy;
+        }
+        
+        // モック結果生成
+        function generateMockResult(formData) {
+            const sizeLayouts = {
+                square: {
+                    name: '正方形（1080×1080）',
+                    layout: '中央配置型レイアウト',
+                    description: 'キャッチコピーを中央上部、ボディコピーを中央、CTAを下部に配置'
                 },
-                target: {
-                    persona: document.getElementById('targetPersona').value,
-                    insight: document.getElementById('targetInsight').value,
-                    situation: document.getElementById('targetSituation').value
+                portrait: {
+                    name: '縦長（1080×1920）',
+                    layout: '縦型階層レイアウト',
+                    description: '上から順にキャッチコピー、素材、ボディコピー、CTAを縦に配置'
                 },
-                appeal: {
-                    mainAxis: document.getElementById('mainAppealAxis').value,
-                    mainContent: document.getElementById('mainAppealContent').value,
-                    subAxis: document.getElementById('subAppealAxis').value,
-                    subContent: document.getElementById('subAppealContent').value,
-                    concept: document.getElementById('concept').value
-                },
-                output: {
-                    platform: document.getElementById('platform').value,
-                    purpose: document.getElementById('purpose').value,
-                    request: document.getElementById('request').value,
-                    patternCount: parseInt(document.getElementById('patternCount').value),
-                    catchCopyLength: parseInt(document.getElementById('catchCopyLength').value),
-                    bodyCopyLength: document.getElementById('bodyCopyLength').value ? parseInt(document.getElementById('bodyCopyLength').value) : null,
-                    ctaLength: document.getElementById('ctaLength').value ? parseInt(document.getElementById('ctaLength').value) : null
+                landscape: {
+                    name: '横長（1200×628）',
+                    layout: '左右分割レイアウト',
+                    description: '左側にテキスト、右側に素材を配置'
                 }
             };
             
-            console.log('フォームデータ:', formData);
+            const categoryStyles = {
+                cosmetics: {
+                    colors: 'ピンクゴールド、ホワイト、ソフトピンク',
+                    font: 'エレガントな明朝体とゴシック体の組み合わせ',
+                    atmosphere: '高級感と優雅さ'
+                },
+                health: {
+                    colors: 'グリーン、ホワイト、ライトブルー',
+                    font: 'クリーンで読みやすいゴシック体',
+                    atmosphere: '信頼感と健康的なイメージ'
+                },
+                fashion: {
+                    colors: 'ブラック、ホワイト、アクセントカラー',
+                    font: 'モダンなサンセリフ体',
+                    atmosphere: 'スタイリッシュでトレンド感'
+                },
+                default: {
+                    colors: 'ブランドカラーを基調とした配色',
+                    font: '視認性の高いゴシック体',
+                    atmosphere: '清潔感と信頼感'
+                }
+            };
             
-            // ローディング表示
-            document.getElementById('loading').classList.add('active');
-            document.getElementById('resultsSection').style.display = 'none';
+            const style = categoryStyles[formData.category] || categoryStyles.default;
+            const layout = sizeLayouts[formData.size];
             
-            // すぐにサンプル結果を表示（API呼び出しはスキップ）
-            setTimeout(() => {
-                displaySampleResults(formData);
-                document.getElementById('loading').classList.remove('active');
-            }, 2000);
-            
-            /* 
-            // Gemini API呼び出し（CORSエラー回避のため一時的にコメントアウト）
-            try {
-                const prompt = createPrompt(formData);
-                console.log('生成されたプロンプト:', prompt);
-                
-                const response = await fetch(GEMINI_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
+            return {
+                layout: {
+                    type: layout.layout,
+                    description: layout.description,
+                    details: [
+                        `キャッチコピー「${formData.catchCopy}」を最も目立つ位置に配置`,
+                        formData.bodyCopy ? `ボディコピーを補足情報として配置` : '',
+                        formData.cta ? `CTAボタン「${formData.cta}」を行動喚起位置に配置` : '',
+                        'ロゴは右下または左上に控えめに配置'
+                    ].filter(item => item)
+                },
+                design: {
+                    colors: style.colors,
+                    font: style.font,
+                    decoration: '光の粒子効果、グラデーション、ソフトシャドウ',
+                    atmosphere: style.atmosphere
+                },
+                materials: [
+                    {
+                        title: 'パターンA：商品訴求型',
+                        description: '商品パッケージを中心に、使用シーンや効果をビジュアル化',
+                        prompt: `Professional product photography of ${formData.productName}, elegant lighting, ${style.colors} color scheme, high quality, commercial style`
                     },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: prompt
-                            }]
-                        }],
-                        generationConfig: {
-                            temperature: 0.8,
-                            topK: 40,
-                            topP: 0.95,
-                            maxOutputTokens: 2048
-                        }
-                    })
-                });
-                
-                console.log('APIレスポンスステータス:', response.status);
-                
-                if (!response.ok) {
-                    const errorData = await response.text();
-                    console.error('APIエラー詳細:', errorData);
-                    throw new Error(`API request failed: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                console.log('APIレスポンスデータ:', data);
-                
-                const generatedText = data.candidates[0].content.parts[0].text;
-                displayResults(generatedText, formData.output.patternCount);
-                showToast('コピーの生成が完了しました！');
-                
-            } catch (error) {
-                console.error('エラー発生:', error);
-                showToast('API接続エラーのため、サンプルを表示します', 'warning');
-                displaySampleResults(formData);
-            } finally {
-                document.getElementById('loading').classList.remove('active');
-            }
-            */
-        });
-        
-        // プロンプト生成関数
-        function createPrompt(data) {
-            let prompt = `プロの広告コピーライターとして、以下の情報を基に効果的な広告コピーを${data.output.patternCount}パターン生成してください。
-
-【商品情報】
-- 商品名: ${data.product.name}
-- カテゴリ: ${data.product.category}
-- 強み・特徴: ${data.product.strength}
-${data.product.usp ? `- USP: ${data.product.usp}` : ''}
-
-【ターゲット情報】
-- ペルソナ: ${data.target.persona}
-- インサイト: ${data.target.insight}
-${data.target.situation ? `- 課題が顕在化する状況: ${data.target.situation}` : ''}
-
-【訴求情報】
-- メイン訴求軸: ${data.appeal.mainAxis}
-- メイン訴求内容: ${data.appeal.mainContent}
-${data.appeal.subAxis ? `- サブ訴求軸: ${data.appeal.subAxis}` : ''}
-${data.appeal.subContent ? `- サブ訴求内容: ${data.appeal.subContent}` : ''}
-${data.appeal.concept ? `- コンセプト: ${data.appeal.concept}` : ''}
-
-【出力要件】
-${data.output.platform ? `- プラットフォーム: ${data.output.platform}` : ''}
-${data.output.purpose ? `- 目的: ${data.output.purpose}` : ''}
-${data.output.request ? `- 要望: ${data.output.request}` : ''}
-- キャッチコピー文字数: 約${data.output.catchCopyLength}文字
-${data.output.bodyCopyLength ? `- ボディコピー文字数: 約${data.output.bodyCopyLength}文字` : ''}
-${data.output.ctaLength ? `- CTA文字数: 約${data.output.ctaLength}文字` : ''}
-
-【出力形式】
-各パターンは以下の形式で出力してください：
-
-パターン[番号]:
-キャッチコピー: [キャッチコピー]
-${data.output.bodyCopyLength ? 'ボディコピー: [ボディコピー]' : ''}
-${data.output.ctaLength ? 'CTA: [CTA文言]' : ''}
-
-訴求のポイントを変えて、ターゲットの心に響く多様なパターンを生成してください。`;
-            
-            return prompt;
-        }
-        
-        // 結果表示関数
-        function displayResults(text, patternCount) {
-            const container = document.getElementById('resultsContainer');
-            container.innerHTML = '';
-            
-            // テキストをパターンごとに分割
-            const patterns = text.split(/パターン\d+:/i).filter(p => p.trim());
-            
-            patterns.forEach((pattern, index) => {
-                if (index >= patternCount) return;
-                
-                const lines = pattern.trim().split('\n');
-                const copyData = {
-                    catchCopy: '',
-                    bodyCopy: '',
-                    cta: ''
-                };
-                
-                lines.forEach(line => {
-                    if (line.includes('キャッチコピー:')) {
-                        copyData.catchCopy = line.replace(/キャッチコピー:/i, '').trim();
-                    } else if (line.includes('ボディコピー:') || line.includes('ボディーコピー:')) {
-                        copyData.bodyCopy = line.replace(/ボディ[ーィ]?コピー:/i, '').trim();
-                    } else if (line.includes('CTA:')) {
-                        copyData.cta = line.replace(/CTA:/i, '').trim();
+                    {
+                        title: 'パターンB：ライフスタイル型',
+                        description: 'ターゲット層の理想的な生活シーンを表現',
+                        prompt: `Lifestyle photography showing happy person using ${formData.productName}, natural lighting, ${style.atmosphere} atmosphere, professional quality`
+                    },
+                    {
+                        title: 'パターンC：アブストラクト型',
+                        description: '抽象的な背景で商品の価値を象徴的に表現',
+                        prompt: `Abstract background with ${style.colors} gradient, geometric shapes, modern design, premium feel, suitable for ${formData.category} advertisement`
                     }
-                });
-                
-                const resultDiv = document.createElement('div');
-                resultDiv.className = 'copy-result fade-in';
-                resultDiv.innerHTML = `
-                    <div class="copy-number">${index + 1}</div>
-                    ${copyData.catchCopy ? `
-                    <div class="copy-content">
-                        <div class="copy-label">キャッチコピー</div>
-                        <div class="copy-text">${copyData.catchCopy}</div>
-                    </div>
-                    ` : ''}
-                    ${copyData.bodyCopy ? `
-                    <div class="copy-content">
-                        <div class="copy-label">ボディコピー</div>
-                        <div class="copy-text">${copyData.bodyCopy}</div>
-                    </div>
-                    ` : ''}
-                    ${copyData.cta ? `
-                    <div class="copy-content">
-                        <div class="copy-label">CTA</div>
-                        <div class="copy-text">${copyData.cta}</div>
-                    </div>
-                    ` : ''}
-                    <div class="copy-actions">
-                        <button class="copy-btn" onclick="copyText(this, '${escapeQuotes(copyData.catchCopy + (copyData.bodyCopy ? '\n' + copyData.bodyCopy : '') + (copyData.cta ? '\n' + copyData.cta : ''))}')">
-                            <span>📋</span>
-                            <span>コピー</span>
-                        </button>
-                    </div>
-                `;
-                container.appendChild(resultDiv);
-            });
-            
-            document.getElementById('resultsSection').style.display = 'block';
-            showToast('コピーの生成が完了しました！');
+                ]
+            };
         }
         
-        // サンプル結果表示（エラー時のフォールバック）
-        function displaySampleResults(formData) {
-            const samplePatterns = [
-                {
-                    catchCopy: `忙しいママの味方！${formData.product.name}で毎日の掃除が驚くほどラクに`,
-                    bodyCopy: formData.output.bodyCopyLength ? `${formData.appeal.mainContent} ${formData.product.strength.substring(0, 50)}...今なら特別価格でご提供中。` : '',
-                    cta: formData.output.ctaLength ? '今すぐ詳細を見る' : ''
-                },
-                {
-                    catchCopy: `【${formData.appeal.mainAxis}】プロも認める${formData.product.name}の実力`,
-                    bodyCopy: formData.output.bodyCopyLength ? `${formData.appeal.concept} あなたの家族の健康と時間を守る、新しい掃除習慣をはじめませんか？` : '',
-                    cta: formData.output.ctaLength ? '無料お試しはこちら' : ''
-                },
-                {
-                    catchCopy: `もう掃除で悩まない。${formData.product.name}が選ばれる3つの理由`,
-                    bodyCopy: formData.output.bodyCopyLength ? `①${formData.appeal.mainAxis} ②${formData.appeal.subAxis || '高い信頼性'} ③特許技術による確かな効果。今だけ限定キャンペーン実施中！` : '',
-                    cta: formData.output.ctaLength ? '特別価格を確認' : ''
-                },
-                {
-                    catchCopy: `「まさかこんなに違うなんて...」${formData.product.name}利用者の92%が効果を実感`,
-                    bodyCopy: formData.output.bodyCopyLength ? `${formData.target.insight} そんなあなたの願いを叶える、革新的な掃除アイテムです。` : '',
-                    cta: formData.output.ctaLength ? 'お客様の声を見る' : ''
-                },
-                {
-                    catchCopy: `時短×清潔×経済的。${formData.product.name}で理想の掃除習慣を`,
-                    bodyCopy: formData.output.bodyCopyLength ? `${formData.product.usp || formData.product.strength.substring(0, 60)}... 今なら30日間返金保証付き。` : '',
-                    cta: formData.output.ctaLength ? 'リスクなしで試す' : ''
-                }
-            ];
+        // 結果表示
+        function displayResult(result) {
+            // プレビュー更新
+            const formData = collectFormData();
+            const preview = document.getElementById('bannerPreview');
+            preview.className = `banner-preview ${formData.size}`;
             
-            const container = document.getElementById('resultsContainer');
-            container.innerHTML = '';
+            document.getElementById('previewContent').innerHTML = `
+                <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">
+                    ${formData.catchCopy}
+                </div>
+                ${formData.bodyCopy ? `<div style="margin-bottom: 1rem;">${formData.bodyCopy}</div>` : ''}
+                ${formData.cta ? `<div style="padding: 0.5rem 1rem; background: var(--primary); color: white; border-radius: var(--radius); display: inline-block;">${formData.cta}</div>` : ''}
+            `;
             
-            for (let i = 0; i < Math.min(formData.output.patternCount, samplePatterns.length); i++) {
-                const pattern = samplePatterns[i];
-                const resultDiv = document.createElement('div');
-                resultDiv.className = 'copy-result fade-in';
-                resultDiv.innerHTML = `
-                    <div class="copy-number">${i + 1}</div>
-                    <div class="copy-content">
-                        <div class="copy-label">キャッチコピー</div>
-                        <div class="copy-text">${pattern.catchCopy}</div>
-                    </div>
-                    ${pattern.bodyCopy ? `
-                    <div class="copy-content">
-                        <div class="copy-label">ボディコピー</div>
-                        <div class="copy-text">${pattern.bodyCopy}</div>
-                    </div>
-                    ` : ''}
-                    ${pattern.cta ? `
-                    <div class="copy-content">
-                        <div class="copy-label">CTA</div>
-                        <div class="copy-text">${pattern.cta}</div>
-                    </div>
-                    ` : ''}
-                    <div class="copy-actions">
-                        <button class="copy-btn" onclick="copyText(this, '${escapeQuotes(pattern.catchCopy + (pattern.bodyCopy ? '\n' + pattern.bodyCopy : '') + (pattern.cta ? '\n' + pattern.cta : ''))}')">
-                            <span>📋</span>
-                            <span>コピー</span>
-                        </button>
-                    </div>
-                `;
-                container.appendChild(resultDiv);
-            }
+            // レイアウト指示
+            document.getElementById('layoutInstruction').innerHTML = `
+                <div class="instruction-title">
+                    <span>📐</span> ${result.layout.type}
+                </div>
+                <div class="instruction-content">
+                    <p>${result.layout.description}</p>
+                    <ul>
+                        ${result.layout.details.map(detail => `<li>${detail}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
             
-            document.getElementById('resultsSection').style.display = 'block';
-            showToast('AIによるコピー生成が完了しました！');
+            // デザイン指示
+            document.getElementById('designInstruction').innerHTML = `
+                <div class="instruction-title">
+                    <span>🎨</span> ビジュアルデザイン指示
+                </div>
+                <div class="instruction-content">
+                    <p><strong>配色：</strong>${result.design.colors}</p>
+                    <p><strong>フォント：</strong>${result.design.font}</p>
+                    <p><strong>装飾要素：</strong>${result.design.decoration}</p>
+                    <p><strong>全体の雰囲気：</strong>${result.design.atmosphere}</p>
+                </div>
+            `;
+            
+            // 素材バリエーション
+            const materialsHTML = result.materials.map(material => `
+                <div class="material-card">
+                    <div class="material-card-title">${material.title}</div>
+                    <div class="material-card-description">${material.description}</div>
+                    <div class="material-prompt">
+                        <strong>AI生成プロンプト：</strong><br>
+                        ${material.prompt}
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('materialVariations').innerHTML = materialsHTML;
         }
         
-        // テキストコピー関数
-        function copyText(button, text) {
+        // クリップボードにコピー
+        function copyToClipboard() {
+            if (!generatedResult) return;
+            
+            const formData = collectFormData();
+            const text = `
+【バナー制作ディレクション指示書】
+
+■商品情報
+商品名：${formData.productName}
+カテゴリ：${formData.category}
+${formData.appealStrategy ? `訴求方針：${formData.appealStrategy}` : ''}
+
+■制作仕様
+サイズ：${formData.size === 'square' ? '1080×1080' : formData.size === 'portrait' ? '1080×1920' : '1200×628'}
+パターン数：${formData.patterns}
+想定媒体：${formData.media.join(', ')}
+
+■コピー
+キャッチコピー：${formData.catchCopy}
+${formData.bodyCopy ? `ボディコピー：${formData.bodyCopy}` : ''}
+${formData.cta ? `CTA：${formData.cta}` : ''}
+
+■レイアウト指示
+${generatedResult.layout.type}
+${generatedResult.layout.description}
+${generatedResult.layout.details.map(d => `・${d}`).join('\n')}
+
+■デザイン指示
+配色：${generatedResult.design.colors}
+フォント：${generatedResult.design.font}
+装飾：${generatedResult.design.decoration}
+雰囲気：${generatedResult.design.atmosphere}
+
+■素材パターン
+${generatedResult.materials.map((m, i) => `
+${i + 1}. ${m.title}
+${m.description}
+プロンプト：${m.prompt}
+`).join('')}
+            `;
+            
             navigator.clipboard.writeText(text).then(() => {
-                const originalText = button.innerHTML;
-                button.innerHTML = '<span>✓</span><span>コピー済み</span>';
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                }, 2000);
+                showToast('クリップボードにコピーしました');
             });
         }
         
-        // すべてコピー関数
-        function copyAll() {
-            const results = document.querySelectorAll('.copy-text');
-            let allText = '';
-            results.forEach((result, index) => {
-                if (index > 0 && index % 3 === 0) allText += '\n---\n';
-                allText += result.textContent + '\n';
-            });
+        // HTMLダウンロード
+        function downloadAsHTML() {
+            const content = document.getElementById('resultSection').innerHTML;
+            const html = `
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>バナー制作ディレクション指示書</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .card { background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        h2 { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>バナー制作ディレクション指示書</h1>
+    ${content}
+</body>
+</html>`;
             
-            navigator.clipboard.writeText(allText).then(() => {
-                showToast('すべてのコピーをクリップボードにコピーしました');
-            });
+            const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `banner_direction_${Date.now()}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('HTMLファイルをダウンロードしました');
         }
         
-        // エスケープ関数
-        function escapeQuotes(text) {
-            return text.replace(/'/g, "\\'").replace(/"/g, '\\"');
+        // テキストダウンロード
+        function downloadAsText() {
+            if (!generatedResult) return;
+            
+            const formData = collectFormData();
+            const text = `
+バナー制作ディレクション指示書
+生成日時：${new Date().toLocaleString('ja-JP')}
+
+==========================================
+■商品情報
+==========================================
+商品名：${formData.productName}
+カテゴリ：${formData.category}
+${formData.appealStrategy ? `訴求方針：${formData.appealStrategy}` : ''}
+
+==========================================
+■制作仕様
+==========================================
+サイズ：${formData.size === 'square' ? '1080×1080（正方形）' : formData.size === 'portrait' ? '1080×1920（縦長）' : '1200×628（横長）'}
+パターン数：${formData.patterns}パターン
+想定媒体：${formData.media.join(', ')}
+
+==========================================
+■コピー
+==========================================
+キャッチコピー：${formData.catchCopy}
+${formData.bodyCopy ? `ボディコピー：${formData.bodyCopy}` : ''}
+${formData.cta ? `CTA：${formData.cta}` : ''}
+
+==========================================
+■レイアウト指示
+==========================================
+レイアウトタイプ：${generatedResult.layout.type}
+説明：${generatedResult.layout.description}
+
+詳細指示：
+${generatedResult.layout.details.map(d => `・${d}`).join('\n')}
+
+==========================================
+■デザイン指示
+==========================================
+配色：${generatedResult.design.colors}
+フォント：${generatedResult.design.font}
+装飾要素：${generatedResult.design.decoration}
+全体の雰囲気：${generatedResult.design.atmosphere}
+
+==========================================
+■素材指示（${generatedResult.materials.length}パターン）
+==========================================
+${generatedResult.materials.map((m, i) => `
+【パターン${i + 1}】${m.title}
+説明：${m.description}
+
+AI画像生成用プロンプト：
+${m.prompt}
+`).join('\n')}
+
+==========================================
+■制作上の注意事項
+==========================================
+1. ブランドガイドラインに準拠してください
+2. 各媒体の推奨事項を確認してください
+3. テキストの可読性を最優先に考慮してください
+4. モバイルでの表示を必ず確認してください
+5. 著作権・肖像権に注意してください
+
+==========================================
+`;
+            
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `banner_direction_${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('テキストファイルをダウンロードしました');
         }
         
-        // エラーメッセージ表示関数
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            const errorText = document.getElementById('errorText');
-            if (errorDiv && errorText) {
-                errorText.textContent = message;
-                errorDiv.style.display = 'block';
-                setTimeout(() => {
-                    errorDiv.style.display = 'none';
-                }, 5000);
-            }
+        // 再生成
+        function regenerate() {
+            generateDirection();
         }
         
-        // トースト表示関数
+        // トースト表示
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
-            const messageEl = toast.querySelector('.toast-message');
-            const iconEl = toast.querySelector('.toast-icon');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
             
-            messageEl.textContent = message;
-            iconEl.textContent = type === 'warning' ? '⚠️' : '✓';
-            
+            toastMessage.textContent = message;
+            toastIcon.textContent = type === 'error' ? '❌' : '✅';
             toast.classList.add('show');
             
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
         }
+        
+        // 初期化
+        updateButtons();
     </script>
 </body>
 </html>
