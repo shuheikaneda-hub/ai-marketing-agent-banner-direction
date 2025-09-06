@@ -1027,15 +1027,22 @@ CTA: ${formData.ctaText}
                     card.innerHTML = `
                         <div class="layout-card-title">${variation.name}</div>
                         <div class="layout-thumbnail">
-                            <div style="padding: 1rem; font-size: 0.75rem; color: var(--gray-600);">
-                                ${variation.pattern}<br>
-                                <small>${variation.effectiveness}</small>
+                            <div style="padding: 1rem; font-size: 0.75rem; color: var(--gray-600); text-align: center;">
+                                <div style="font-weight: 600; margin-bottom: 0.25rem;">${variation.pattern}</div>
+                                <small>${variation.effectiveness || variation.description || ''}</small>
                             </div>
                         </div>
                     `;
                     card.onclick = () => selectVariation(index);
                     container.appendChild(card);
                 });
+                
+                // 最初のバリエーションにホバー効果を追加（推奨を示す）
+                const firstCard = container.querySelector('.layout-card');
+                if (firstCard) {
+                    const title = firstCard.querySelector('.layout-card-title');
+                    title.innerHTML += ' <span style="color: var(--primary); font-size: 0.75rem;">（推奨）</span>';
+                }
             }
         }
         
