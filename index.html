@@ -1026,58 +1026,164 @@
         // 結果表示
         function displayResult(result) {
             const formData = collectFormData();
+            const patternCount = parseInt(formData.patterns);
             
-            // プレビュー更新
-            document.getElementById('previewContent1').innerHTML = `
-                <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.75rem;">
-                    ${formData.catchCopy}
-                </div>
-                ${formData.bodyCopy ? `<div style="font-size: 0.9rem; margin-bottom: 0.75rem;">${formData.bodyCopy}</div>` : ''}
-                ${formData.cta ? `<div style="padding: 0.4rem 0.8rem; background: var(--primary); color: white; border-radius: var(--radius); display: inline-block; font-size: 0.85rem;">${formData.cta}</div>` : ''}
+            // パターン数に応じてタブ表示
+            if (patternCount >= 3) {
+                document.getElementById('pattern3Tab').style.display = 'inline-block';
+            }
+            
+            // 各パターンの情報を設定
+            for (let i = 1; i <= Math.min(patternCount, 3); i++) {
+                // 制作物情報
+                const sizeText = formData.size === 'square' ? '1：1（1080×1080px）' : 
+                                formData.size === 'portrait' ? '9：16（1080×1920px）' : 
+                                '16：9（1200×628px）';
+                document.getElementById(`sizeInfo${i}`).textContent = sizeText;
+                document.getElementById(`patternCount${i}`).textContent = patternCount;
+                document.getElementById(`mediaInfo${i}`).textContent = formData.media.join('、');
+                
+                // デザイン指示
+                const designDirection = getDesignDirection(formData, i);
+                document.getElementById(`designDirection${i}`).innerHTML = designDirection;
+                
+                // バナープレビュー（コピー配置を最適化）
+                const copyPlacement = getCopyPlacement(formData, i);
+                document.getElementById(`bannerPreview${i}`).innerHTML = copyPlacement.html;
+                document.getElementById(`bannerPreview${i}`).className = `banner-preview-main ${copyPlacement.class}`;
+                
+                // 構成指示
+                const compositionNotes = getCompositionNotes(formData, i);
+                document.getElementById(`compositionNotes${i}`).innerHTML = compositionNotes;
+            }
+        }
+        
+        // デザイン指示を取得
+        function getDesignDirection(formData, pattern) {
+            const categoryStyles = {
+                cosmetics: {
+                    colors: 'ピンクゴールドを基調とした配色',
+                    font: '視認性の高いゴシック体',
+                    atmosphere: '清潔感と信頼感'
+                },
+                health: {
+                    colors: 'グリーンを基調とした配色',
+                    font: '視認性の高いゴシック体',
+                    atmosphere: '健康的で信頼感のある雰囲気'
+                },
+                default: {
+                    colors: 'ブランドカラーを基調とした配色',
+                    font: '視認性の高いゴシック体',
+                    atmosphere: '清潔感と信頼感'
+                }
+            };
+            
+            const style = categoryStyles[formData.category] || categoryStyles.default;
+            
+            return `
+                <ul>
+                    <li>配色：${style.colors}</li>
+                    <li>フォント：${style.font}</li>
+                    <li>全体の雰囲気：${style.atmosphere}</li>
+                </ul>
             `;
+        }
+        
+        // コピー配置の最適化
+        function getCopyPlacement(formData, pattern) {
+            const catchLength = formData.catchCopy.length;
+            const hasBody = formData.bodyCopy && formData.bodyCopy.length > 0;
+            const hasCTA = formData.cta && formData.cta.length > 0;
             
-            document.getElementById('previewContent2').innerHTML = `
-                <div style="width: 100%; text-align: left;">
-                    <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem;">
-                        ${formData.catchCopy}
+            let html = '';
+            let className = '';
+            
+            // パターンごとに異なる配置戦略
+            if (pattern === 1) {
+                // パターンA：短いコピーは左上、長いコピーは中央
+                if (catchLength <= 10 && !hasBody) {
+                    className = 'copy-placement-top-left';
+                    html = `
+                        <div class="${className}">
+                            <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">
+                                ${formData.catchCopy}
+                            </div>
+                            ${hasCTA ? `<div style="margin-top: 1rem; padding: 0.5rem 1rem; background: #333; color: white; display: inline-block; border-radius: 4px;">${formData.cta}</div>` : ''}
+                        </div>
+                    `;
+                } else {
+                    className = 'copy-placement-center';
+                    html = `
+                        <div class="${className}">
+                            <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.75rem;">
+                                ${formData.catchCopy}
+                            </div>
+                            ${hasBody ? `<div style="font-size: 0.9rem; margin-bottom: 0.75rem;">${formData.bodyCopy}</div>` : ''}
+                            ${hasCTA ? `<div style="margin-top: 1rem; padding: 0.5rem 1rem; background: #333; color: white; display: inline-block; border-radius: 4px;">${formData.cta}</div>` : ''}
+                        </div>
+                    `;
+                }
+            } else if (pattern === 2) {
+                // パターンB：左寄せレイアウト
+                className = 'copy-placement-left-center';
+                html = `
+                    <div class="${className}">
+                        <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; line-height: 1.4;">
+                            ${formData.catchCopy}
+                        </div>
+                        ${hasBody ? `<div style="font-size: 0.85rem; color: #666; line-height: 1.5;">${formData.bodyCopy}</div>` : ''}
+                        ${hasCTA ? `<div style="margin-top: 0.75rem; padding: 0.4rem 0.8rem; background: #333; color: white; display: inline-block; border-radius: 4px; font-size: 0.85rem;">${formData.cta}</div>` : ''}
                     </div>
-                    ${formData.bodyCopy ? `<div style="font-size: 0.85rem; color: var(--gray-700);">${formData.bodyCopy}</div>` : ''}
-                </div>
-            `;
+                `;
+            } else {
+                // パターンC：下部配置
+                className = 'copy-placement-bottom-right';
+                html = `
+                    <div class="${className}">
+                        <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem;">
+                            ${formData.catchCopy}
+                        </div>
+                        ${hasBody ? `<div style="font-size: 0.85rem; color: #666;">${formData.bodyCopy}</div>` : ''}
+                        ${hasCTA ? `<div style="margin-top: 0.5rem; padding: 0.3rem 0.6rem; background: #333; color: white; display: inline-block; border-radius: 4px; font-size: 0.8rem;">${formData.cta}</div>` : ''}
+                    </div>
+                `;
+            }
             
-            // レイアウト指示
-            document.getElementById('layoutInstruction').innerHTML = `
-                <div class="instruction-title">レイアウトパターン（${formData.patterns}種類）</div>
-                <div class="instruction-content">
-                    <h4>パターンA：${result.layouts[0].type}</h4>
-                    <p>${result.layouts[0].description}</p>
-                    <h4 style="margin-top: 1rem;">パターンB：${result.layouts[1].type}</h4>
-                    <p>${result.layouts[1].description}</p>
-                    <h4 style="margin-top: 1rem;">共通配置指示</h4>
-                    <ul>
-                        ${result.layoutDetails.map(detail => `<li>${detail}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
+            return { html, class: className };
+        }
+        
+        // 構成指示を取得
+        function getCompositionNotes(formData, pattern) {
+            const catchLength = formData.catchCopy.length;
+            const notes = [];
             
-            // デザイン指示
-            document.getElementById('designInstruction').innerHTML = `
-                <div class="instruction-title">ビジュアルデザイン指示</div>
-                <div class="instruction-content">
-                    <p><strong>配色：</strong>${result.design.colors}</p>
-                    <p><strong>フォント：</strong>${result.design.font}</p>
-                    <p><strong>全体の雰囲気：</strong>${result.design.atmosphere}</p>
-                </div>
-            `;
+            if (pattern === 1) {
+                if (catchLength <= 10) {
+                    notes.push('キャッチコピーを左上に配置し強調');
+                    notes.push('下にロゴとCTAを配置');
+                } else {
+                    notes.push('キャッチコピーとボディコピーを中央に配置');
+                    notes.push('CTAを記載');
+                }
+            } else if (pattern === 2) {
+                notes.push('AI活用によるWEBマーケティング改革と業務フロー構築ステップを完全解説');
+                notes.push('[無料で資料プレゼント中]');
+            } else {
+                notes.push('ライフスタイル型：ターゲット層の理想的な生活シーンを表現');
+                notes.push('イメージ制作プロンプト：');
+            }
             
-            // 素材バリエーション
-            const materialsHTML = result.materials.map(material => `
-                <div class="material-card">
-                    <h4>${material.title}</h4>
-                    <p>${material.description}</p>
-                </div>
-            `).join('');
-            document.getElementById('materialVariations').innerHTML = materialsHTML;
+            return notes.map(note => `<li>${note}</li>`).join('');
+        }
+        
+        // パターン切り替え
+        function switchPattern(num) {
+            // タブの切り替え
+            document.querySelectorAll('.pattern-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.pattern-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelectorAll('.pattern-tab')[num - 1].classList.add('active');
+            document.getElementById(`pattern${num}`).classList.add('active');
         }
         
         // クリップボードにコピー
