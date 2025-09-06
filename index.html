@@ -684,7 +684,7 @@
                 </div>
                 <div class="progress-step" data-step="3">
                     <div class="progress-step-circle">3</div>
-                    <div class="progress-step-label">コピー設定</div>
+                    <div class="progress-step-label">コピー作成</div>
                 </div>
                 <div class="progress-step" data-step="4">
                     <div class="progress-step-circle">4</div>
@@ -1180,18 +1180,42 @@
             const sizeLayouts = {
                 square: {
                     name: '正方形（1080×1080）',
-                    layout: '中央配置型レイアウト',
-                    description: 'キャッチコピーを中央上部、ボディコピーを中央、CTAを下部に配置'
+                    layouts: [
+                        {
+                            type: '中央配置型レイアウト',
+                            description: 'キャッチコピーを中央上部、ボディコピーを中央、CTAを下部に配置'
+                        },
+                        {
+                            type: '分割配置型レイアウト',
+                            description: '上下または左右に分割し、テキストと素材を効果的に配置'
+                        }
+                    ]
                 },
                 portrait: {
                     name: '縦長（1080×1920）',
-                    layout: '縦型階層レイアウト',
-                    description: '上から順にキャッチコピー、素材、ボディコピー、CTAを縦に配置'
+                    layouts: [
+                        {
+                            type: '縦型階層レイアウト',
+                            description: '上から順にキャッチコピー、素材、ボディコピー、CTAを縦に配置'
+                        },
+                        {
+                            type: '縦型ストーリーレイアウト',
+                            description: '視線の流れに沿って上から下へストーリー性を持たせた配置'
+                        }
+                    ]
                 },
                 landscape: {
                     name: '横長（1200×628）',
-                    layout: '左右分割レイアウト',
-                    description: '左側にテキスト、右側に素材を配置'
+                    layouts: [
+                        {
+                            type: '左右分割レイアウト',
+                            description: '左側にテキスト、右側に素材を配置'
+                        },
+                        {
+                            type: '横型フロー レイアウト',
+                            description: '左から右への自然な視線誘導を意識した配置'
+                        }
+                    ]
                 }
             };
             
@@ -1219,19 +1243,16 @@
             };
             
             const style = categoryStyles[formData.category] || categoryStyles.default;
-            const layout = sizeLayouts[formData.size];
+            const layouts = sizeLayouts[formData.size].layouts;
             
             return {
-                layout: {
-                    type: layout.layout,
-                    description: layout.description,
-                    details: [
-                        `キャッチコピー「${formData.catchCopy}」を最も目立つ位置に配置`,
-                        formData.bodyCopy ? `ボディコピーを補足情報として配置` : '',
-                        formData.cta ? `CTAボタン「${formData.cta}」を行動喚起位置に配置` : '',
-                        'ロゴは右下または左上に控えめに配置'
-                    ].filter(item => item)
-                },
+                layouts: layouts,
+                layoutDetails: [
+                    `キャッチコピー「${formData.catchCopy}」を最も目立つ位置に配置`,
+                    formData.bodyCopy ? `ボディコピーを補足情報として配置` : '',
+                    formData.cta ? `CTAボタン「${formData.cta}」を行動喚起位置に配置` : '',
+                    'ロゴは右下または左上に控えめに配置'
+                ].filter(item => item),
                 design: {
                     colors: style.colors,
                     font: style.font,
@@ -1248,11 +1269,6 @@
                         title: 'パターンB：ライフスタイル型',
                         description: 'ターゲット層の理想的な生活シーンを表現',
                         prompt: `Lifestyle photography showing happy person using ${formData.productName}, natural lighting, ${style.atmosphere} atmosphere, professional quality`
-                    },
-                    {
-                        title: 'パターンC：アブストラクト型',
-                        description: '抽象的な背景で商品の価値を象徴的に表現',
-                        prompt: `Abstract background with ${style.colors} gradient, geometric shapes, modern design, premium feel, suitable for ${formData.category} advertisement`
                     }
                 ]
             };
@@ -1262,26 +1278,48 @@
         function displayResult(result) {
             // プレビュー更新
             const formData = collectFormData();
-            const preview = document.getElementById('bannerPreview');
-            preview.className = `banner-preview ${formData.size}`;
+            const preview1 = document.getElementById('bannerPreview1');
+            const preview2 = document.getElementById('bannerPreview2');
+            preview1.className = `banner-preview ${formData.size}`;
+            preview2.className = `banner-preview ${formData.size}`;
             
-            document.getElementById('previewContent').innerHTML = `
-                <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">
+            // パターンA（中央配置）
+            document.getElementById('previewContent1').innerHTML = `
+                <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.75rem;">
                     ${formData.catchCopy}
                 </div>
-                ${formData.bodyCopy ? `<div style="margin-bottom: 1rem;">${formData.bodyCopy}</div>` : ''}
-                ${formData.cta ? `<div style="padding: 0.5rem 1rem; background: var(--primary); color: white; border-radius: var(--radius); display: inline-block;">${formData.cta}</div>` : ''}
+                ${formData.bodyCopy ? `<div style="font-size: 0.9rem; margin-bottom: 0.75rem;">${formData.bodyCopy}</div>` : ''}
+                ${formData.cta ? `<div style="padding: 0.4rem 0.8rem; background: var(--primary); color: white; border-radius: var(--radius); display: inline-block; font-size: 0.85rem;">${formData.cta}</div>` : ''}
+            `;
+            
+            // パターンB（分割配置）
+            document.getElementById('previewContent2').innerHTML = `
+                <div style="width: 100%; text-align: left;">
+                    <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem;">
+                        ${formData.catchCopy}
+                    </div>
+                    ${formData.bodyCopy ? `<div style="font-size: 0.85rem; color: var(--gray-700);">${formData.bodyCopy}</div>` : ''}
+                </div>
+                ${formData.cta ? `<div style="position: absolute; bottom: 1rem; right: 1rem; padding: 0.3rem 0.6rem; background: var(--primary); color: white; border-radius: var(--radius); font-size: 0.8rem;">${formData.cta}</div>` : ''}
             `;
             
             // レイアウト指示
             document.getElementById('layoutInstruction').innerHTML = `
                 <div class="instruction-title">
-                    <span>📐</span> ${result.layout.type}
+                    <span>📐</span> レイアウトパターン（2種類）
+                </div>
+                <div class="instruction-content" style="margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--primary-dark); margin-bottom: 0.5rem;">パターンA：${result.layouts[0].type}</h4>
+                    <p>${result.layouts[0].description}</p>
+                </div>
+                <div class="instruction-content" style="margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--primary-dark); margin-bottom: 0.5rem;">パターンB：${result.layouts[1].type}</h4>
+                    <p>${result.layouts[1].description}</p>
                 </div>
                 <div class="instruction-content">
-                    <p>${result.layout.description}</p>
+                    <h4 style="color: var(--primary-dark); margin-bottom: 0.5rem;">共通配置指示</h4>
                     <ul>
-                        ${result.layout.details.map(detail => `<li>${detail}</li>`).join('')}
+                        ${result.layoutDetails.map(detail => `<li>${detail}</li>`).join('')}
                     </ul>
                 </div>
             `;
@@ -1299,7 +1337,7 @@
                 </div>
             `;
             
-            // 素材バリエーション
+            // 素材バリエーション（2パターンのみ）
             const materialsHTML = result.materials.map(material => `
                 <div class="material-card">
                     <div class="material-card-title">${material.title}</div>
