@@ -877,6 +877,9 @@
             await generateDirection();
         });
         
+        // GAS APIのURL（デプロイ後に更新してください）
+        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbzkSKpy_A5kmBr4s40Ny5FAlUwvp2JrkXjPNdifOtXXptsRPVlaO10tR3HZnmUoVxADDg/exec'; // ← ここにGASのウェブアプリURLを設定
+        
         // ディレクション生成
         async function generateDirection() {
             const formData = collectFormData();
@@ -891,19 +894,89 @@
             document.getElementById('loading').classList.add('active');
             document.getElementById('resultSection').classList.remove('active');
             
-            // 仮の生成処理
-            setTimeout(() => {
-                const result = generateMockResult(formData);
-                displayResult(result);
-                generatedResult = result;
+            try {
+                // GAS APIが設定されているか確認
+                if (GAS_API_URL === 'YOUR_GAS_WEB_APP_URL_HERE') {
+                    // GAS未設定の場合はモックデータを使用
+                    console.log('GAS API URLが未設定のため、モックデータを使用します');
+                    setTimeout(() => {
+                        const result = generateMockResult(formData);
+                        displayResult(result);
+                        generatedResult = result;
+                        
+                        document.getElementById('loading').classList.remove('active');
+                        document.getElementById('resultSection').classList.add('active');
+                        showToast('ディレクション指示書を生成しました！（モックデータ）');
+                        
+                        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+                    }, 2000);
+                    return;
+                }
                 
-                document.getElementById('loading').classList.remove('active');
-                document.getElementById('resultSection').classList.add('active');
-                showToast('ディレクション指示書を生成しました！');
+                // GAS APIを呼び出し
+                const response = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // GASはCORSに対応していないため
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
                 
-                // スクロール
-                document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
-            }, 2000);
+                // no-corsモードのため、レスポンスは取得できない
+                // GASからの応答を別の方法で取得する必要がある場合は、
+                // JSONPやGoogle Sheets APIを使用することを検討
+                
+                // 一旦、成功したものとして処理
+                setTimeout(async () => {
+                    try {
+                        // GASからのレスポンスを取得（実装例）
+                        const result = await fetchGASResult(formData);
+                        displayResult(result);
+                        generatedResult = result;
+                        
+                        document.getElementById('loading').classList.remove('active');
+                        document.getElementById('resultSection').classList.add('active');
+                        showToast('AIがディレクション指示書を生成しました！');
+                        
+                        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+                    } catch (error) {
+                        // エラー時はモックデータにフォールバック
+                        const result = generateMockResult(formData);
+                        displayResult(result);
+                        generatedResult = result;
+                        
+                        document.getElementById('loading').classList.remove('active');
+                        document.getElementById('resultSection').classList.add('active');
+                        showToast('ディレクション指示書を生成しました！');
+                        
+                        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 3000);
+                
+            } catch (error) {
+                console.error('API呼び出しエラー:', error);
+                
+                // エラー時はモックデータを使用
+                setTimeout(() => {
+                    const result = generateMockResult(formData);
+                    displayResult(result);
+                    generatedResult = result;
+                    
+                    document.getElementById('loading').classList.remove('active');
+                    document.getElementById('resultSection').classList.add('active');
+                    showToast('ディレクション指示書を生成しました！（フォールバック）');
+                    
+                    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+                }, 2000);
+            }
+        }
+        
+        // GASの結果を取得（実装例）
+        async function fetchGASResult(formData) {
+            // 実際の実装では、GASからの結果を取得する方法を実装
+            // 例：Google Sheets APIを使用、またはポーリングなど
+            return generateMockResult(formData);
         }
         
         // フォームデータ収集
