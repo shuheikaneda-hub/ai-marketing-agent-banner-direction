@@ -1463,13 +1463,16 @@ ${formData.bodyCopy ? `ボディコピー：${formData.bodyCopy}` : ''}
 ${formData.cta ? `CTA：${formData.cta}` : ''}
 
 ==========================================
-■レイアウト指示
+■レイアウト指示（2パターン）
 ==========================================
-レイアウトタイプ：${generatedResult.layout.type}
-説明：${generatedResult.layout.description}
+【パターンA】${generatedResult.layouts[0].type}
+説明：${generatedResult.layouts[0].description}
 
-詳細指示：
-${generatedResult.layout.details.map(d => `・${d}`).join('\n')}
+【パターンB】${generatedResult.layouts[1].type}
+説明：${generatedResult.layouts[1].description}
+
+共通配置指示：
+${generatedResult.layoutDetails.map(d => `・${d}`).join('\n')}
 
 ==========================================
 ■デザイン指示
@@ -1480,7 +1483,7 @@ ${generatedResult.layout.details.map(d => `・${d}`).join('\n')}
 全体の雰囲気：${generatedResult.design.atmosphere}
 
 ==========================================
-■素材指示（${generatedResult.materials.length}パターン）
+■素材指示（2パターン）
 ==========================================
 ${generatedResult.materials.map((m, i) => `
 【パターン${i + 1}】${m.title}
